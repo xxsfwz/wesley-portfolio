@@ -41,6 +41,12 @@ New project/
 - 视频、Showreel、项目录屏：放进 `assets/videos/`
 - PDF 简历、证书扫描件：放进 `assets/pdf/`
 
+当前简历文件：
+
+- `assets/pdf/冯文泽_简历_作品集版.pdf`
+- `assets/pdf/冯文泽_简历_校招照片版.pdf`
+- `assets/pdf/冯文泽_简历_源文件.docx`
+
 ## 建议下一步准备的素材
 
 - 3D作品渲染图：每个项目 3 到 6 张
