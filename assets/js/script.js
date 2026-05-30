@@ -28,7 +28,9 @@ const revealObserver = new IntersectionObserver(
 );
 
 document
-  .querySelectorAll(".section-heading, .work-row, .ai-shot, .case-layout, .method-grid > div, .resume-block")
+  .querySelectorAll(
+    ".section-heading, .work-row, .video-case-layout, .story-strip a, .ai-shot, .case-layout, .method-grid > div, .resume-block"
+  )
   .forEach((item) => {
     item.classList.add("reveal-item");
     revealObserver.observe(item);
