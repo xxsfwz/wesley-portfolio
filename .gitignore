@@ -1,0 +1,13 @@
+# Local-only folders created while preparing files.
+00_面试准备/
+01_视频作品与素材/
+02_系统报告与备份/
+03_旧实验与归档/
+
+# Local notes not intended for the public portfolio repo.
+项目文件夹说明.md
+
+# Tool caches and temporary output.
+tools/__pycache__/
+tools/.video_deps/
+
