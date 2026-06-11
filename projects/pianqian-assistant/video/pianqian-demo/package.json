@@ -1,0 +1,14 @@
+{
+  "name": "pianqian-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "hyperframes lint",
+    "inspect": "hyperframes inspect --samples 14",
+    "render": "hyperframes render --output \"C:/Users/xxsfw/Desktop/项目/05_小满摘星计划_AI项目笔试/片前助手/视频/片前助手_demo.mp4\" --quality standard --fps 30"
+  },
+  "devDependencies": {
+    "gsap": "^3.14.2",
+    "hyperframes": "^0.6.91"
+  }
+}

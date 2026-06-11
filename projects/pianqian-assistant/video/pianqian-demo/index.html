@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>片前助手 Demo</title>
+    <style>
+      :root {
+        --bg: #f4f0e8;
+        --paper: #fffdf8;
+        --ink: #181614;
+        --muted: #6d665d;
+        --line: #d8d0c5;
+        --blue: #315f8c;
+        --clay: #b8624f;
+        --green: #5e7d63;
+        --soft: #ece5da;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, sans-serif;
+      }
+
+      #pianqian-demo {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 16% 12%, rgba(49, 95, 140, 0.09), transparent 420px),
+          linear-gradient(135deg, #f7f2e9 0%, var(--bg) 54%, #eee6da 100%);
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.075;
+        background-image:
+          radial-gradient(circle at 20% 30%, #181614 0 1px, transparent 1px),
+          radial-gradient(circle at 72% 62%, #181614 0 1px, transparent 1px);
+        background-size: 9px 9px, 13px 13px;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .rule {
+        position: absolute;
+        left: 90px;
+        right: 90px;
+        top: 88px;
+        height: 1px;
+        background: rgba(24, 22, 20, 0.12);
+        z-index: 2;
+      }
+
+      .brand-mark {
+        position: absolute;
+        top: 42px;
+        left: 90px;
+        z-index: 3;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        color: var(--blue);
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .brand-dot {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--blue);
+        box-shadow: inset 0 0 0 8px rgba(255, 253, 248, 0.55);
+      }
+
+      .timer {
+        position: absolute;
+        top: 42px;
+        right: 90px;
+        z-index: 3;
+        color: var(--muted);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        padding: 128px 118px 88px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 34px;
+      }
+
+      .caption {
+        position: absolute;
+        left: 118px;
+        right: 118px;
+        bottom: 54px;
+        z-index: 20;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+      }
+
+      .caption span {
+        max-width: 1120px;
+        padding: 16px 26px;
+        border: 1px solid rgba(24, 22, 20, 0.13);
+        border-radius: 999px;
+        background: rgba(255, 253, 248, 0.86);
+        color: var(--ink);
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 1.28;
+        box-shadow: 0 18px 44px rgba(43, 37, 30, 0.1);
+      }
+
+      .headline {
+        max-width: 870px;
+        margin: 0;
+        font-size: 82px;
+        line-height: 1.08;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+
+      .subline {
+        max-width: 780px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 31px;
+        line-height: 1.55;
+      }
+
+      .desktop {
+        position: absolute;
+        right: 114px;
+        top: 168px;
+        width: 760px;
+        height: 570px;
+      }
+
+      .photo,
+      .note,
+      .tag-chip,
+      .paper-card,
+      .panel,
+      .output-card,
+      .mini-card {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: 0 22px 58px rgba(43, 37, 30, 0.12);
+      }
+
+      .photo {
+        position: absolute;
+        width: 228px;
+        height: 154px;
+        border-radius: 10px;
+        padding: 12px;
+      }
+
+      .photo::before {
+        content: "";
+        display: block;
+        height: 88px;
+        border-radius: 7px;
+        background: linear-gradient(135deg, rgba(49, 95, 140, 0.22), rgba(184, 98, 79, 0.18));
+      }
+
+      .photo span {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .p1 {
+        left: 58px;
+        top: 32px;
+        transform: rotate(-5deg);
+      }
+
+      .p2 {
+        left: 322px;
+        top: 70px;
+        transform: rotate(4deg);
+      }
+
+      .p3 {
+        left: 178px;
+        top: 270px;
+        transform: rotate(-2deg);
+      }
+
+      .note {
+        position: absolute;
+        right: 42px;
+        bottom: 54px;
+        width: 300px;
+        min-height: 210px;
+        border-radius: 8px;
+        padding: 26px;
+        transform: rotate(3deg);
+      }
+
+      .note b {
+        display: block;
+        margin-bottom: 16px;
+        color: var(--clay);
+        font-size: 22px;
+      }
+
+      .note p {
+        margin: 12px 0;
+        color: var(--ink);
+        font-size: 20px;
+        line-height: 1.35;
+      }
+
+      .word-cloud {
+        position: absolute;
+        right: 105px;
+        top: 190px;
+        width: 840px;
+        height: 540px;
+      }
+
+      .tag-chip {
+        position: absolute;
+        border-radius: 999px;
+        padding: 20px 28px;
+        color: var(--ink);
+        font-size: 33px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .tag-chip small {
+        color: var(--muted);
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .t1 { left: 70px; top: 45px; transform: rotate(-4deg); }
+      .t2 { left: 405px; top: 96px; transform: rotate(5deg); }
+      .t3 { left: 182px; top: 224px; transform: rotate(2deg); }
+      .t4 { left: 518px; top: 294px; transform: rotate(-5deg); }
+      .t5 { left: 35px; top: 386px; transform: rotate(4deg); }
+
+      .arrow-line {
+        position: absolute;
+        left: 498px;
+        top: 430px;
+        width: 220px;
+        height: 3px;
+        background: var(--blue);
+        opacity: 0.9;
+      }
+
+      .arrow-line::after {
+        content: "";
+        position: absolute;
+        right: -4px;
+        top: -8px;
+        width: 18px;
+        height: 18px;
+        border-top: 3px solid var(--blue);
+        border-right: 3px solid var(--blue);
+        transform: rotate(45deg);
+      }
+
+      .app-screen {
+        position: absolute;
+        inset: 96px 112px 116px;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 24px;
+        padding: 30px;
+        border: 1px solid rgba(24, 22, 20, 0.15);
+        border-radius: 24px;
+        background: rgba(255, 253, 248, 0.76);
+        box-shadow: 0 30px 84px rgba(43, 37, 30, 0.14);
+      }
+
+      .panel {
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 14px 34px rgba(43, 37, 30, 0.08);
+      }
+
+      .panel-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .pill {
+        border-radius: 999px;
+        padding: 8px 14px;
+        background: rgba(49, 95, 140, 0.1);
+        color: var(--blue);
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .field {
+        margin: 10px 0 14px;
+      }
+
+      .field label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .input-box {
+        min-height: 50px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink);
+        font-size: 19px;
+        line-height: 1.35;
+      }
+
+      .textarea-box {
+        min-height: 88px;
+      }
+
+      .button {
+        width: 100%;
+        margin-top: 14px;
+        border-radius: 999px;
+        padding: 18px 24px;
+        background: var(--ink);
+        color: var(--paper);
+        font-size: 24px;
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .cursor {
+        position: absolute;
+        left: 578px;
+        top: 770px;
+        width: 38px;
+        height: 38px;
+        z-index: 12;
+        transform: rotate(-12deg);
+      }
+
+      .cursor::before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 20px solid var(--ink);
+        border-top: 0 solid transparent;
+        border-bottom: 34px solid transparent;
+      }
+
+      .status-line {
+        color: var(--clay);
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .result-empty {
+        height: 470px;
+        border: 1px dashed rgba(24, 22, 20, 0.18);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 22px;
+        line-height: 1.5;
+        text-align: center;
+        padding: 34px;
+      }
+
+      .output-card {
+        margin: 7px 0;
+        border-radius: 14px;
+        padding: 10px 14px;
+        box-shadow: none;
+        background: #f7f2ea;
+      }
+
+      .output-card b {
+        display: inline-block;
+        min-width: 104px;
+        color: var(--blue);
+        font-size: 18px;
+      }
+
+      .output-card span {
+        color: var(--ink);
+        font-size: 17px;
+        line-height: 1.5;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .mini-card {
+        min-height: 88px;
+        border-radius: 14px;
+        padding: 12px;
+        box-shadow: none;
+      }
+
+      .mini-card b {
+        display: block;
+        color: var(--blue);
+        font-size: 17px;
+        margin-bottom: 7px;
+      }
+
+      .mini-card span {
+        color: var(--ink);
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .focus-board {
+        position: absolute;
+        inset: 156px 130px 156px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 22px;
+      }
+
+      .feature {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px;
+        background: rgba(255, 253, 248, 0.9);
+        box-shadow: 0 18px 48px rgba(43, 37, 30, 0.1);
+      }
+
+      .feature strong {
+        display: block;
+        color: var(--blue);
+        font-size: 34px;
+        margin-bottom: 14px;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 22px;
+        line-height: 1.5;
+      }
+
+      .timeline {
+        position: absolute;
+        left: 132px;
+        right: 132px;
+        bottom: 138px;
+        height: 76px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 253, 248, 0.8);
+        display: flex;
+        gap: 10px;
+        padding: 13px;
+      }
+
+      .clip {
+        flex: 1;
+        border-radius: 11px;
+        background: rgba(49, 95, 140, 0.18);
+      }
+
+      .clip:nth-child(2n) {
+        background: rgba(184, 98, 79, 0.18);
+      }
+
+      .end-card {
+        align-items: center;
+        text-align: center;
+      }
+
+      .end-card .headline {
+        max-width: 100%;
+        font-size: 118px;
+      }
+
+      .end-card .subline {
+        max-width: 930px;
+        font-size: 38px;
+      }
+
+      .checklist {
+        margin-top: 18px;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .checklist span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 12px 18px;
+        background: rgba(255, 253, 248, 0.9);
+        color: var(--muted);
+        font-size: 20px;
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pianqian-demo" data-composition-id="pianqian-demo" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+      <div class="grain" data-layout-ignore></div>
+      <div class="rule"></div>
+      <div class="brand-mark"><span class="brand-dot"></span><span>PIANQIAN ASSISTANT</span></div>
+      <div class="timer">30s product demo</div>
+
+      <section class="scene scene-1">
+        <h1 class="headline">短视频还没开剪，想法已经散了</h1>
+        <p class="subline">主题、素材、平台、目标都在，但还没有变成一张能照着做的清单。</p>
+        <div class="desktop">
+          <div class="photo p1"><span>门口招牌.mov</span></div>
+          <div class="photo p2"><span>咖啡制作.mov</span></div>
+          <div class="photo p3"><span>座位环境.mov</span></div>
+          <div class="note">
+            <b>待整理</b>
+            <p>开头怎么说？</p>
+            <p>镜头怎么排？</p>
+            <p>还缺什么画面？</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene scene-2">
+        <h1 class="headline">卡点不是剪辑软件</h1>
+        <p class="subline">真正麻烦的是开剪前，不知道先判断什么、先补什么、先表达什么。</p>
+        <div class="word-cloud">
+          <div class="tag-chip t1">选题 <small>太散</small></div>
+          <div class="tag-chip t2">脚本 <small>没顺序</small></div>
+          <div class="tag-chip t3">分镜 <small>难拆</small></div>
+          <div class="tag-chip t4">素材缺口</div>
+          <div class="tag-chip t5">封面标题</div>
+        </div>
+      </section>
+
+      <section class="scene scene-app">
+        <div class="app-screen">
+          <div class="panel input-panel">
+            <div class="panel-title">输入 <span class="pill">MVP 原型</span></div>
+            <div class="field">
+              <label>内容主题</label>
+              <div class="input-box">校园咖啡店探店，15 秒短视频</div>
+            </div>
+            <div class="field">
+              <label>已有素材</label>
+              <div class="input-box textarea-box">门口招牌、咖啡制作、座位环境<br />缺少菜单近景和路线画面</div>
+            </div>
+            <div class="field">
+              <label>发布平台</label>
+              <div class="input-box">小红书 / 抖音</div>
+            </div>
+            <div class="field">
+              <label>目标</label>
+              <div class="input-box">让观众收藏，下次去店里自习</div>
+            </div>
+            <div class="button">生成剪辑前期方案</div>
+          </div>
+
+          <div class="panel output-panel">
+            <div class="panel-title">输出 <span class="status-line">等待生成</span></div>
+            <div class="result-empty">点击左侧按钮后，整理成脚本、分镜、补拍和发布清单。</div>
+            <div class="results">
+              <div class="output-card"><b>脚本骨架</b><span>先给安静自习场景，再补价格、距离和体验判断。</span></div>
+              <div class="output-card"><b>分镜清单</b><span>招牌 → 座位 → 菜单 → 咖啡 → 路线 → 结尾卡片。</span></div>
+              <div class="output-card"><b>补拍提醒</b><span>菜单近景、从宿舍到门店的路、店内插座位置。</span></div>
+              <div class="mini-grid" data-layout-allow-overflow>
+                <div class="mini-card"><b>封面标题</b><span>学校附近能坐一下午的店</span></div>
+                <div class="mini-card"><b>字幕层级</b><span>结论优先，细节补充</span></div>
+                <div class="mini-card"><b>发布复盘</b><span>看收藏率和前 3 秒留存</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="cursor"></div>
+        </div>
+      </section>
+
+      <section class="scene scene-5">
+        <h1 class="headline">它不替你一键成片</h1>
+        <p class="subline">它先把开剪前最容易乱掉的判断，拆成能执行的几个模块。</p>
+        <div class="focus-board">
+          <div class="feature"><strong>脚本骨架</strong><p>先确定开头、中段和收尾，不边剪边想。</p></div>
+          <div class="feature"><strong>分镜清单</strong><p>把现有素材排成镜头顺序，缺口更明显。</p></div>
+          <div class="feature"><strong>补拍提醒</strong><p>开剪前补关键画面，减少返工。</p></div>
+          <div class="feature"><strong>封面标题</strong><p>把观众最关心的理由提前说清楚。</p></div>
+          <div class="feature"><strong>字幕层级</strong><p>结论、细节和提示各归各位。</p></div>
+          <div class="feature"><strong>发布复盘</strong><p>用完播、收藏和评论反推下一版。</p></div>
+        </div>
+      </section>
+
+      <section class="scene end-card scene-6">
+        <h1 class="headline">片前助手</h1>
+        <p class="subline">把混乱想法整理成能开剪的清单。</p>
+        <div class="checklist">
+          <span>主题</span>
+          <span>素材</span>
+          <span>平台</span>
+          <span>目标</span>
+          <span>前期方案</span>
+        </div>
+        <div class="timeline">
+          <div class="clip"></div>
+          <div class="clip"></div>
+          <div class="clip"></div>
+          <div class="clip"></div>
+          <div class="clip"></div>
+        </div>
+      </section>
+
+      <div class="caption"><span class="caption-text">做短视频，最先卡住的往往不是剪辑。</span></div>
+
+      <script src="vendor/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        gsap.set(".scene", { opacity: 0 });
+        gsap.set(".scene-1", { opacity: 1 });
+        gsap.set(".scene-app", { opacity: 0 });
+        gsap.set(".results", { opacity: 0 });
+        gsap.set(".cursor", { opacity: 0 });
+        gsap.set(".scene-5", { opacity: 0 });
+        gsap.set(".scene-6", { opacity: 0 });
+
+        tl.from(".scene-1 .headline", { y: 42, opacity: 0, duration: 0.55, ease: "power3.out" }, 0);
+        tl.from(".scene-1 .subline", { y: 30, opacity: 0, duration: 0.48, ease: "power3.out" }, 0.18);
+        tl.from(".scene-1 .photo", { y: 45, opacity: 0, scale: 0.96, stagger: 0.12, duration: 0.55, ease: "power3.out" }, 0.3);
+        tl.from(".scene-1 .note", { y: 38, opacity: 0, rotation: -2, duration: 0.55, ease: "power3.out" }, 0.74);
+
+        tl.to(".caption-text", { opacity: 0, y: 12, duration: 0.22, ease: "power2.in" }, 2.78);
+        tl.set(".caption-text", { textContent: "真正麻烦的是：开剪前不知道怎么整理。" }, 3);
+        tl.to(".caption-text", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 3.02);
+        tl.to(".scene-1", { opacity: 0, y: -24, duration: 0.45, ease: "power2.inOut" }, 2.85);
+        tl.set(".scene-2", { opacity: 1, y: 0 }, 3.05);
+        tl.from(".scene-2 .headline", { y: 42, opacity: 0, duration: 0.52, ease: "power3.out" }, 3.1);
+        tl.from(".scene-2 .subline", { y: 30, opacity: 0, duration: 0.46, ease: "power3.out" }, 3.28);
+        tl.from(".tag-chip", { y: 44, opacity: 0, scale: 0.9, stagger: 0.11, duration: 0.5, ease: "back.out(1.2)" }, 3.55);
+        tl.to(".tag-chip", { y: -8, duration: 2.2, stagger: 0.05, ease: "sine.inOut" }, 4.4);
+
+        tl.to(".caption-text", { opacity: 0, y: 12, duration: 0.22, ease: "power2.in" }, 6.75);
+        tl.set(".caption-text", { textContent: "输入主题、素材、平台和目标。" }, 7);
+        tl.to(".caption-text", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 7.02);
+        tl.to(".scene-2", { opacity: 0, y: -22, duration: 0.42, ease: "power2.inOut" }, 6.82);
+        tl.set(".scene-app", { opacity: 1, y: 0 }, 7.05);
+        tl.from(".app-screen", { y: 54, opacity: 0, scale: 0.985, duration: 0.65, ease: "power3.out" }, 7.08);
+        tl.from(".input-panel .field", { x: -26, opacity: 0, stagger: 0.14, duration: 0.42, ease: "power2.out" }, 7.6);
+        tl.from(".button", { y: 22, opacity: 0, duration: 0.42, ease: "power2.out" }, 8.55);
+
+        tl.to(".caption-text", { opacity: 0, y: 12, duration: 0.22, ease: "power2.in" }, 11.75);
+        tl.set(".caption-text", { textContent: "点击生成，输出一份可执行的剪辑前期方案。" }, 12);
+        tl.to(".caption-text", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 12.02);
+        tl.to(".cursor", { opacity: 1, duration: 0.18 }, 12.1);
+        tl.fromTo(".cursor", { x: -140, y: -80 }, { x: 0, y: 0, duration: 0.65, ease: "power2.out" }, 12.12);
+        tl.to(".button", { scale: 0.985, backgroundColor: "#315f8c", duration: 0.16, ease: "power2.out" }, 12.82);
+        tl.to(".button", { scale: 1, backgroundColor: "#181614", duration: 0.2, ease: "power2.out" }, 13.02);
+        tl.to(".result-empty", { opacity: 0, y: -16, duration: 0.3, ease: "power2.in" }, 13.1);
+        tl.set(".status-line", { textContent: "已生成" }, 13.16);
+        tl.to(".results", { opacity: 1, duration: 0.22 }, 13.25);
+        tl.from(".output-card", { x: 34, opacity: 0, stagger: 0.22, duration: 0.48, ease: "power3.out" }, 13.28);
+        tl.from(".mini-card", { y: 30, opacity: 0, stagger: 0.12, duration: 0.44, ease: "power3.out" }, 14.35);
+        tl.to(".cursor", { opacity: 0, duration: 0.24 }, 15.2);
+
+        tl.to(".caption-text", { opacity: 0, y: 12, duration: 0.22, ease: "power2.in" }, 17.72);
+        tl.set(".caption-text", { textContent: "脚本、分镜、补拍、封面、字幕和复盘都先理清楚。" }, 18);
+        tl.to(".caption-text", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 18.02);
+        tl.to(".scene-app", { opacity: 0, y: -24, duration: 0.46, ease: "power2.inOut" }, 17.82);
+        tl.set(".scene-5", { opacity: 1, y: 0 }, 18.08);
+        tl.from(".scene-5 .headline", { y: 42, opacity: 0, duration: 0.55, ease: "power3.out" }, 18.12);
+        tl.from(".scene-5 .subline", { y: 30, opacity: 0, duration: 0.46, ease: "power3.out" }, 18.34);
+        tl.from(".feature", { y: 38, opacity: 0, scale: 0.97, stagger: 0.12, duration: 0.46, ease: "power3.out" }, 18.7);
+        tl.to(".feature", { borderColor: "#b8624f", duration: 0.28, stagger: 0.28, ease: "power2.out" }, 20.25);
+        tl.to(".feature", { borderColor: "#d8d0c5", duration: 0.28, stagger: 0.28, ease: "power2.out" }, 20.55);
+
+        tl.to(".caption-text", { opacity: 0, y: 12, duration: 0.22, ease: "power2.in" }, 23.72);
+        tl.set(".caption-text", { textContent: "片前助手：把混乱想法整理成能开剪的清单。" }, 24);
+        tl.to(".caption-text", { opacity: 1, y: 0, duration: 0.28, ease: "power2.out" }, 24.02);
+        tl.to(".scene-5", { opacity: 0, y: -22, duration: 0.45, ease: "power2.inOut" }, 23.82);
+        tl.set(".scene-6", { opacity: 1, y: 0 }, 24.08);
+        tl.from(".scene-6 .headline", { y: 52, opacity: 0, duration: 0.62, ease: "power3.out" }, 24.12);
+        tl.from(".scene-6 .subline", { y: 34, opacity: 0, duration: 0.48, ease: "power3.out" }, 24.42);
+        tl.from(".checklist span", { y: 26, opacity: 0, stagger: 0.09, duration: 0.38, ease: "power2.out" }, 24.86);
+        tl.from(".clip", { scaleX: 0, transformOrigin: "left center", stagger: 0.12, duration: 0.5, ease: "power2.out" }, 25.34);
+        tl.to(".caption-text", { opacity: 0, y: 12, duration: 0.35, ease: "power2.in" }, 28.9);
+
+        tl.to(".grain", { opacity: 0.11, duration: 3, yoyo: true, repeat: 9, ease: "sine.inOut" }, 0);
+        tl.to(".brand-dot", { scale: 1.08, duration: 1.6, yoyo: true, repeat: 18, ease: "sine.inOut" }, 0);
+
+        window.__timelines["pianqian-demo"] = tl;
+      </script>
+    </div>
+  </body>
+</html>

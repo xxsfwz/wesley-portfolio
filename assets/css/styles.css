@@ -941,6 +941,20 @@ h3 {
   gap: 12px;
 }
 
+.project-demo-frame {
+  min-height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.project-demo-frame video {
+  min-height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.project-demo-actions {
+  margin-top: 14px;
+}
+
 .resume {
   width: 100%;
   max-width: none;
