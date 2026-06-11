@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>片前助手 MVP 原型</title>
+    <style>
+      :root {
+        --bg: #f4f0e8;
+        --paper: #fffdf8;
+        --ink: #151515;
+        --muted: #696969;
+        --line: rgba(21, 21, 21, 0.14);
+        --blue: #315f8c;
+        --clay: #b8624f;
+        --shadow: 0 18px 55px rgba(43, 37, 30, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 20% 12%, rgba(49, 95, 140, 0.08), transparent 28rem),
+          var(--bg);
+        color: var(--ink);
+        font-family: Arial, "Microsoft YaHei", sans-serif;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.055;
+        background-image:
+          radial-gradient(circle at 20% 30%, #151515 0 1px, transparent 1px),
+          radial-gradient(circle at 70% 60%, #151515 0 1px, transparent 1px);
+        background-size: 7px 7px, 11px 11px;
+      }
+
+      .wrap {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 38px 0 56px;
+      }
+
+      header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 26px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 8px;
+        font-size: clamp(44px, 7vw, 88px);
+        line-height: 0.95;
+      }
+
+      header p {
+        max-width: 620px;
+        margin-bottom: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      label {
+        display: block;
+        margin: 14px 0 7px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      textarea,
+      input,
+      select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink);
+        font: inherit;
+        outline: none;
+      }
+
+      textarea {
+        min-height: 106px;
+        resize: vertical;
+      }
+
+      .hint {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .btn {
+        width: 100%;
+        margin-top: 18px;
+        border: 0;
+        border-radius: 999px;
+        padding: 13px 18px;
+        background: var(--ink);
+        color: var(--paper);
+        cursor: pointer;
+        font: inherit;
+        font-weight: 800;
+      }
+
+      .btn:hover {
+        background: var(--blue);
+      }
+
+      .result-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+
+      .status {
+        color: var(--clay);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .step {
+        margin: 10px 0;
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-left: 5px solid var(--blue);
+        border-radius: 12px;
+        background: rgba(21, 21, 21, 0.035);
+        line-height: 1.65;
+      }
+
+      .step b {
+        color: var(--blue);
+      }
+
+      .cols {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .mini {
+        min-height: 122px;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.62);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .mini b {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--blue);
+      }
+
+      .empty {
+        color: var(--muted);
+      }
+
+      @media (max-width: 860px) {
+        header,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        header {
+          display: block;
+        }
+
+        .cols {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <header>
+        <div>
+          <p class="eyebrow">Content AI Prototype</p>
+          <h1>片前助手</h1>
+          <p>先不接真正的 AI，用一个规则模板跑通核心体验：输入主题和素材，点击生成，得到一份可以直接开剪的前期清单。</p>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="card">
+          <h2>输入</h2>
+          <label for="topic">内容主题</label>
+          <input id="topic" value="校园咖啡店探店，适合自习，15秒短视频" />
+
+          <label for="materials">已有素材</label>
+          <textarea id="materials">门口招牌、咖啡制作、座位环境；缺少菜单近景和路线画面</textarea>
+
+          <label for="platform">发布平台</label>
+          <select id="platform">
+            <option>小红书 / 抖音</option>
+            <option>小红书</option>
+            <option>抖音</option>
+            <option>B站</option>
+            <option>视频号</option>
+          </select>
+
+          <label for="goal">希望观众看完做什么</label>
+          <input id="goal" value="收藏，下次去店里自习" />
+
+          <p class="hint">这是无后端版本，结果由页面里的规则生成，适合做早期 MVP 演示。</p>
+          <button class="btn" id="generate" type="button">生成剪辑前期方案</button>
+        </section>
+
+        <section class="card">
+          <div class="result-head">
+            <h2>输出</h2>
+            <span class="status" id="status">示例结果</span>
+          </div>
+          <div id="result">
+            <p class="empty">点击左侧按钮后，会根据输入内容生成脚本骨架、分镜清单、补拍提醒、封面标题、字幕层级和复盘问题。</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const topicEl = document.querySelector("#topic");
+      const materialsEl = document.querySelector("#materials");
+      const platformEl = document.querySelector("#platform");
+      const goalEl = document.querySelector("#goal");
+      const resultEl = document.querySelector("#result");
+      const statusEl = document.querySelector("#status");
+      const generateBtn = document.querySelector("#generate");
+
+      function pickStyle(platform) {
+        if (platform.includes("小红书")) {
+          return {
+            hook: "先给一个具体场景或利益点，不要铺垫太久",
+            title: "这家店适合一个人安静待一下午",
+            review: "看收藏率和评论里是否有人问地址/价格",
+          };
+        }
+        if (platform.includes("抖音")) {
+          return {
+            hook: "前2秒直接上最有记忆点的画面",
+            title: "学校附近这个自习角落可以收藏",
+            review: "看前3秒留存，判断开头是否够直接",
+          };
+        }
+        if (platform.includes("B站")) {
+          return {
+            hook: "先交代主题，再用画面慢慢建立氛围",
+            title: "一次校园周边自习空间记录",
+            review: "看平均观看时长和弹幕/评论反馈",
+          };
+        }
+        return {
+          hook: "开头先说清楚这条内容解决什么问题",
+          title: "一个值得收藏的校园周边去处",
+          review: "看完播率和互动问题，判断信息是否讲清楚",
+        };
+      }
+
+      function splitMaterials(text) {
+        return text
+          .replace(/[；;，、]/g, ",")
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean);
+      }
+
+      function renderPlan() {
+        const topic = topicEl.value.trim() || "一条短视频";
+        const platform = platformEl.value.trim();
+        const goal = goalEl.value.trim() || "让观众愿意收藏或继续了解";
+        const materials = splitMaterials(materialsEl.value);
+        const style = pickStyle(platform);
+        const materialText = materials.length ? materials.slice(0, 4).join("、") : "现有素材";
+        const missing = materialsEl.value.includes("缺少")
+          ? materialsEl.value.split(/缺少/).pop().trim()
+          : "开场近景、关键细节、结尾引导画面";
+
+        resultEl.innerHTML = `
+          <div class="step"><b>脚本骨架：</b>${style.hook}。这条内容可以围绕“${topic}”展开：开头用${materialText}快速进入主题，中段补充环境和细节，结尾引导观众${goal}。</div>
+          <div class="step"><b>分镜清单：</b>1. 最吸引人的画面做开头；2. 给出地点/对象全景；3. 展示2-3个关键细节；4. 加一句使用体验或判断；5. 用收藏/评论引导收尾。</div>
+          <div class="step"><b>补拍提醒：</b>${missing}。如果时间不够，优先补拍能证明卖点的近景和一条清楚的结尾画面。</div>
+          <div class="cols">
+            <div class="mini"><b>封面标题</b>${style.title}<br>备选：${topic.replace(/，.*/, "")}，我会这样剪</div>
+            <div class="mini"><b>字幕层级</b>第一层讲结论，第二层补充细节。每句尽量短，避免把画面里已经有的信息再重复一遍。</div>
+            <div class="mini"><b>发布复盘</b>${style.review}。如果数据弱，优先改开头、封面和前5秒节奏。</div>
+          </div>
+        `;
+        statusEl.textContent = "已生成";
+      }
+
+      generateBtn.addEventListener("click", renderPlan);
+      renderPlan();
+    </script>
+  </body>
+</html>
