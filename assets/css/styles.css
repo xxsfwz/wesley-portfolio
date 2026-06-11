@@ -569,6 +569,8 @@ h3 {
 
 .motion-card {
   overflow: hidden;
+  width: 100%;
+  max-width: 420px;
   min-width: 0;
   background: var(--paper);
   border: 1px solid var(--line);
@@ -579,6 +581,7 @@ h3 {
 .motion-card video {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
   max-height: 236px;
   background: #111;
