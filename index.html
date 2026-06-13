@@ -3,8 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="冯文泽 Wesley Feng 的个人作品集，展示视频剪辑、视觉包装、AI 辅助创作、内容项目和简历。"
+    />
+    <meta property="og:title" content="冯文泽 Wesley Feng | 作品集与简历" />
+    <meta property="og:description" content="视频剪辑、视觉包装、AI 辅助创作和内容项目作品集。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/glide-video/glide-story-06-large.webp" />
     <title>冯文泽 Wesley Feng | 作品集与简历</title>
-    <link rel="stylesheet" href="assets/css/styles.css?v=ae-size-2" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=studio-2" />
   </head>
   <body>
     <header class="site-header">
@@ -12,11 +20,10 @@
         <span>Wesley Feng</span>
       </a>
       <nav class="nav" aria-label="主导航">
-        <a href="#ai-video">AI 视频</a>
-        <a href="#ae-motion">AE 动效</a>
-        <a href="#ai-visuals">抖音案例</a>
-        <a href="#project-notes">项目文档</a>
-        <a href="#photography">摄影作品</a>
+        <a href="#featured">代表作品</a>
+        <a href="#pianqian">片前助手</a>
+        <a href="#ai-visuals">视觉案例</a>
+        <a href="#practice">练习与补充</a>
         <a href="#resume">简历</a>
         <a href="#contact">联系</a>
       </nav>
@@ -25,56 +32,45 @@
     <main id="top">
       <section class="hero">
         <div class="hero-copy-block">
-          <p class="eyebrow">Portfolio / Video / AIGC</p>
-          <h1>视频剪辑、AI 视觉与内容表达作品集</h1>
+          <p class="eyebrow">Portfolio / Editing / Visual Work</p>
+          <h1>把想法剪成能看懂的画面。</h1>
           <p class="hero-copy">
-            我是冯文泽，软件工程专业在读。这个作品集重点展示我在视频剪辑、AI 图像/视频内容制作、视觉包装和工具整合方面的实践。
-            目前页面保留最能说明能力的作品，后续会继续补充更完整的项目过程和成片案例。
+            我是冯文泽，软件工程专业在读。这里整理了近期做过的视频剪辑、视觉包装、AI 视觉和一个内容工具小项目。
+            我更喜欢先把内容关系理清楚，再决定画面节奏和呈现方式。
           </p>
           <div class="hero-meta" aria-label="个人摘要">
             <span>周口师范学院 · 软件工程 2023 级</span>
-            <span>方向：视频剪辑 / AI 视觉内容 / 新媒体内容制作</span>
-            <span>工具链：剪辑包装、AI 生成、网页展示与办公交付的综合使用</span>
+            <span>方向：视频剪辑 / 新媒体内容制作 / AI 辅助视觉</span>
+            <span>常用：Premiere Pro / After Effects / Photoshop / 剪映 / AI 生成工具</span>
           </div>
           <div class="hero-actions" aria-label="主要操作">
-            <a class="button primary" href="#ai-video">查看视频作品</a>
+            <a class="button primary" href="#featured">看代表作品</a>
+            <a class="button ghost" href="#pianqian">看项目过程</a>
             <a class="button ghost" href="#resume">下载简历</a>
           </div>
         </div>
 
-        <div class="cover-wall" aria-label="作品方向预览">
-          <article class="cover cover-large">
-            <span>01</span>
-            <h2>AI 视频</h2>
-            <p>脚本 / 分镜 / 剪辑 / 包装</p>
-          </article>
-          <article class="cover cover-tall">
-            <span>02</span>
-            <h2>视觉案例</h2>
-            <p>AI 图像 / 抖音内容 / 传播反馈</p>
-          </article>
-          <article class="cover cover-small">
-            <span>03</span>
-            <h2>工具整合</h2>
-            <p>学习 / 生成 / 修改 / 迭代</p>
-          </article>
-          <article class="cover cover-wide">
-            <span>04</span>
-            <h2>内容执行</h2>
-            <p>素材整理 / 节奏剪辑 / 交付</p>
-          </article>
+        <div class="cover-wall studio-wall" aria-label="作品预览">
+          <a class="studio-tile studio-tile-large" href="#practice">
+            <img src="assets/images/2d-posters/poster-grid-system.png" alt="剪辑秩序平面海报预览" />
+            <span>Edit Order</span>
+          </a>
+          <a class="studio-tile studio-tile-tall" href="#practice">
+            <img src="assets/images/2d-posters/poster-visual-room.png" alt="AI 视觉档案平面海报预览" />
+            <span>AI Visual Log</span>
+          </a>
         </div>
       </section>
 
-      <section class="section ai-video" id="ai-video">
+      <section class="section ai-video featured-work" id="featured">
         <div class="section-heading ai-video-heading">
           <div>
-            <p class="eyebrow">Motion / AIGC Workflow</p>
+            <p class="eyebrow">Main Work / Video</p>
             <h2>Glide 概念 App 宣传片</h2>
           </div>
           <p>
-            这是一个围绕虚构效率 App「Glide」制作的 AI 视频作品。项目从故事板、镜头设定、手机素材到后期剪辑包装展开，
-            重点展示我对视频节奏、信息组织、字幕层级和 AI 辅助前期设计的理解。
+            这个片子一开始只是一个虚构效率 App 的想法。我先把使用场景拆成早晨、通勤、办公几个段落，
+            再用 AI 做镜头参考，最后用剪辑、字幕和屏幕包装把它整理成一条能看懂的宣传片。
           </p>
         </div>
 
@@ -82,8 +78,8 @@
           <div class="video-hero-frame video-player-frame">
             <video
               controls
-              preload="metadata"
-              poster="assets/images/glide-video/glide-story-06-thumb.webp"
+              preload="none"
+              poster="assets/images/glide-video/glide-video-poster.jpg"
               aria-label="Glide 概念 App 宣传片成片"
             >
               <source src="assets/videos/glide-promo.mp4" type="video/mp4" />
@@ -93,94 +89,86 @@
           </div>
 
           <div class="video-case-copy">
-            <p class="tag">Glide / App Promo / AE + PR</p>
+            <p class="tag">App Promo / Editing / Motion Package</p>
             <h3>把一天的信息流，剪成一条清晰的行动路线。</h3>
             <p>
-              影片围绕年轻职场新人一天的通勤场景展开：从早晨消息爆炸，到出门、地铁、咖啡店和办公场景，
-              Glide 根据当前地点与情境推送最需要的信息。AI 主要用于前期故事板和镜头参考，成片表达仍以剪辑节奏、
-              屏幕替换和动态图形包装为核心。
+              影片围绕年轻职场新人一天的通勤场景展开：消息很多，但人真正需要的是当前场景下最有用的信息。
+              我想练的不是“生成几个好看的镜头”，而是把产品概念、画面节奏、字幕层级和镜头顺序放到同一条线上。
             </p>
             <a class="button ghost video-watch-link" href="assets/videos/glide-promo.mp4" target="_blank" rel="noopener noreferrer">
               单独打开成片 <span aria-hidden="true">→</span>
             </a>
-            <div class="video-meta-grid" aria-label="项目能力标签">
-              <span>AI 故事板辅助</span>
+            <div class="video-meta-grid" aria-label="项目内容">
+              <span>概念拆解</span>
+              <span>AI 镜头参考</span>
               <span>PR 节奏剪辑</span>
               <span>AE 屏幕包装</span>
-              <span>字幕信息组织</span>
             </div>
           </div>
         </div>
 
         <div class="story-strip" aria-label="Glide 宣传片关键故事板">
           <a href="assets/images/glide-video/glide-story-01-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/glide-video/glide-story-01-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板 01 早晨信息爆炸" />
+            <img src="assets/images/glide-video/glide-story-01-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板：早晨信息很多的手机界面" />
             <span>01 / morning</span>
           </a>
           <a href="assets/images/glide-video/glide-story-02-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/glide-video/glide-story-02-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板 02 手机近景" />
+            <img src="assets/images/glide-video/glide-story-02-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板：手机近景和任务提醒" />
             <span>02 / phone</span>
           </a>
           <a href="assets/images/glide-video/glide-story-03-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/glide-video/glide-story-03-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板 03 信息被整理" />
+            <img src="assets/images/glide-video/glide-story-03-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板：信息被整理成清晰提示" />
             <span>03 / clarity</span>
           </a>
           <a href="assets/images/glide-video/glide-story-04-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/glide-video/glide-story-04-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板 04 出门通勤" />
+            <img src="assets/images/glide-video/glide-story-04-thumb.webp" width="900" height="507" loading="lazy" alt="Glide 宣传片故事板：出门通勤场景" />
             <span>04 / commute</span>
           </a>
           <a href="assets/images/glide-video/glide-story-05-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/glide-video/glide-story-05-thumb.webp" width="900" height="506" loading="lazy" alt="Glide 宣传片故事板 05 城市场景触发" />
+            <img src="assets/images/glide-video/glide-story-05-thumb.webp" width="900" height="506" loading="lazy" alt="Glide 宣传片故事板：城市环境触发信息" />
             <span>05 / context</span>
           </a>
         </div>
       </section>
 
-      <section class="section ae-motion" id="ae-motion">
-        <div class="section-heading">
-          <p class="eyebrow">After Effects</p>
-          <h2>AE 动效练习</h2>
+      <section class="section pianqian-project" id="pianqian">
+        <div class="section-heading project-split-heading">
+          <div>
+            <p class="eyebrow">Content Project / Prototype</p>
+            <h2>片前助手</h2>
+          </div>
           <p>
-            两个偏包装方向的小练习，主要展示字体、发光、粒子和节奏控制。它们不是完整商业项目，
-            更适合作为视频剪辑和视觉包装能力的补充。
+            做视频时，我经常卡在开剪之前：选题、脚本、分镜、素材缺口、字幕层级和封面标题都要先想清楚。
+            这个小项目不是做“一键成片”，而是把混乱想法整理成可剪的清单。
           </p>
         </div>
-        <div class="motion-grid">
-          <article class="motion-card">
-            <video controls preload="metadata" poster="assets/images/ae-motion/naiwa-motion-poster.jpg" aria-label="naiwa AE 动效练习">
-              <source src="assets/videos/ae-motion/naiwa-motion.mp4" type="video/mp4" />
-              当前浏览器暂不支持视频播放。
-            </video>
-            <div>
-              <p class="tag">AE / Particle / Glow</p>
-              <h3>naiwa 字体动效</h3>
-              <p>围绕发光字体和粒子扩散做的短动效练习，重点是画面氛围、粒子密度和文字出现的节奏。</p>
-            </div>
-          </article>
-          <article class="motion-card">
-            <video controls preload="metadata" poster="assets/images/ae-motion/title-motion-poster.jpg" aria-label="title AE 动效练习">
-              <source src="assets/videos/ae-motion/title-motion.mp4" type="video/mp4" />
-              当前浏览器暂不支持视频播放。
-            </video>
-            <div>
-              <p class="tag">AE / Typography</p>
-              <h3>Title 字体动效</h3>
-              <p>一个偏基础的标题动效练习，尝试用颜色、反射和运动变化做出更有记忆点的标题画面。</p>
-            </div>
-          </article>
-        </div>
+
+        <a class="project-feature-card" href="projects/pianqian-assistant/index.html">
+          <div class="project-feature-visual">
+            <img src="projects/pianqian-assistant/prototype/原型图.svg" loading="lazy" alt="片前助手原型页面预览" />
+          </div>
+          <div class="project-feature-copy">
+            <p class="tag">Short Video / Script / Shot List</p>
+            <h3>先把想法变清楚，再开始剪。</h3>
+            <p>
+              页面里整理了项目正文、交互原型、Demo 视频和工作流说明。它更像一次轻量机会验证：
+              如果给新手创作者一个输入框，能不能帮他更快拿到脚本骨架、分镜和剪辑清单。
+            </p>
+            <strong>打开项目页 →</strong>
+          </div>
+        </a>
       </section>
 
       <section class="section ai-visuals" id="ai-visuals">
         <div class="section-heading ai-visuals-heading">
           <div>
-            <p class="eyebrow">AIGC Visual Case</p>
+            <p class="eyebrow">Visual Case / Douyin</p>
             <h2>抖音 AI 视觉案例</h2>
           </div>
           <div class="ai-visuals-copy">
             <p>
-              这一组内容围绕生成式 AI 图像创作展开，重点尝试人物质感、画面风格和短视频平台的视觉吸引力。
-              相关作品在抖音获得了十万级播放反馈，后续我会继续补充更完整的提示词思路、生成过程和视频化改编。
+              这一组内容主要是练短视频平台里的视觉吸引力：人物质感、画面风格、第一眼能不能停住。
+              我不会把它包装成很成熟的商业案例，它更像一次真实平台反馈下的视觉实验。
             </p>
             <a
               class="button ghost ai-case-link"
@@ -195,90 +183,239 @@
 
         <div class="ai-gallery" aria-label="生成式 AI 图片作品">
           <a class="ai-shot ai-shot-square" href="assets/images/ai-gallery/ai-visual-01-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/ai-gallery/ai-visual-01-thumb.webp" width="700" height="700" loading="lazy" alt="生成式 AI 视觉实验作品 01" />
+            <img src="assets/images/ai-gallery/ai-visual-01-thumb.webp" width="700" height="700" loading="lazy" alt="生成式 AI 视觉实验作品：人物风格图 01" />
             <span>AI image</span>
           </a>
           <a class="ai-shot ai-shot-square ai-shot-rise" href="assets/images/ai-gallery/ai-visual-02-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/ai-gallery/ai-visual-02-thumb.webp" width="700" height="700" loading="lazy" alt="生成式 AI 视觉实验作品 02" />
+            <img src="assets/images/ai-gallery/ai-visual-02-thumb.webp" width="700" height="700" loading="lazy" alt="生成式 AI 视觉实验作品：人物风格图 02" />
             <span>visual study</span>
           </a>
           <a class="ai-shot ai-shot-square" href="assets/images/ai-gallery/ai-visual-03-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/ai-gallery/ai-visual-03-thumb.webp" width="700" height="700" loading="lazy" alt="生成式 AI 视觉实验作品 03" />
-            <span>short-form content</span>
+            <img src="assets/images/ai-gallery/ai-visual-03-thumb.webp" width="700" height="700" loading="lazy" alt="生成式 AI 视觉实验作品：短视频封面风格图" />
+            <span>short-form</span>
           </a>
           <a class="ai-shot ai-shot-portrait" href="assets/images/ai-gallery/ai-visual-04-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/ai-gallery/ai-visual-04-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品 04" />
-            <span>AI image</span>
+            <img src="assets/images/ai-gallery/ai-visual-04-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品：竖版人物图 01" />
+            <span>portrait</span>
           </a>
           <a class="ai-shot ai-shot-portrait ai-shot-rise" href="assets/images/ai-gallery/ai-visual-05-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/ai-gallery/ai-visual-05-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品 05" />
+            <img src="assets/images/ai-gallery/ai-visual-05-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品：竖版人物图 02" />
             <span>visual study</span>
           </a>
           <a class="ai-shot ai-shot-portrait" href="assets/images/ai-gallery/ai-visual-06-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/ai-gallery/ai-visual-06-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品 06" />
+            <img src="assets/images/ai-gallery/ai-visual-06-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品：竖版人物图 03" />
             <span>AI image</span>
           </a>
           <a class="ai-shot ai-shot-portrait ai-shot-wide-mobile" href="assets/images/ai-gallery/ai-visual-07-large.webp" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/ai-gallery/ai-visual-07-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品 07" />
-            <span>short-form content</span>
+            <img src="assets/images/ai-gallery/ai-visual-07-thumb.webp" width="393" height="700" loading="lazy" alt="生成式 AI 视觉实验作品：竖版人物图 04" />
+            <span>platform test</span>
           </a>
         </div>
       </section>
 
-      <section class="section project-notes" id="project-notes">
+      <section class="section practice-section" id="practice">
         <div class="section-heading">
-          <p class="eyebrow">Project Note</p>
-          <h2>项目文档微网站</h2>
+          <p class="eyebrow">Practice / Extra Frames</p>
+          <h2>练习与补充</h2>
+          <p>
+            这里放一些还没有展开成完整项目、但能说明审美和执行习惯的练习：AE 动效、商业海报、
+            旅行拍摄。它们不是主线作品，但能看出我对画面、节奏和信息层级的判断。
+          </p>
         </div>
-        <a class="note-card" href="projects/pianqian-assistant/index.html">
-          <span>Content AI</span>
-          <div>
-            <h3>片前助手</h3>
-            <p>面向短视频新手创作者的 AI 剪辑前期助理，包含项目说明、原型页面和 Demo 成片。</p>
+
+        <div class="practice-layout">
+          <div class="practice-motion">
+            <article class="motion-card">
+              <video controls preload="none" poster="assets/images/ae-motion/naiwa-motion-poster.jpg" aria-label="naiwa AE 动效练习">
+                <source src="assets/videos/ae-motion/naiwa-motion.mp4" type="video/mp4" />
+                当前浏览器暂不支持视频播放。
+              </video>
+              <div>
+                <p class="tag">AE / Particle / Glow</p>
+                <h3>naiwa 字体动效</h3>
+                <p>围绕发光字体和粒子扩散做的短动效练习，重点是画面氛围、粒子密度和文字出现的节奏。</p>
+              </div>
+            </article>
+            <article class="motion-card">
+              <video controls preload="none" poster="assets/images/ae-motion/title-motion-poster.jpg" aria-label="title AE 动效练习">
+                <source src="assets/videos/ae-motion/title-motion.mp4" type="video/mp4" />
+                当前浏览器暂不支持视频播放。
+              </video>
+              <div>
+                <p class="tag">AE / Typography</p>
+                <h3>Title 字体动效</h3>
+                <p>一个偏基础的标题动效练习，尝试用颜色、反射和运动变化做出更有记忆点的标题画面。</p>
+              </div>
+            </article>
           </div>
-          <strong>Open</strong>
-        </a>
-      </section>
 
-      <section class="section photography" id="photography">
-        <div class="section-heading">
-          <p class="eyebrow">Photography</p>
-          <h2>摄影作品</h2>
-          <p>一些旅行和日常拍摄成片，主要保留风景、动物和静物，作为视频与视觉内容之外的补充作品。</p>
+          <div class="photo-journal" aria-label="摄影补充作品">
+            <div class="photo-journal-copy">
+              <p class="tag">Photography</p>
+              <h3>摄影</h3>
+              <p>
+                一些旅行和日常拍摄，主要保留风景、动物和静物画面。
+              </p>
+            </div>
+            <div class="photo-strip compact-photo-strip">
+            <a class="photo-card photo-feature js-lightbox" href="assets/images/photography/photo-01.jpg" data-title="Night Sky" data-note="低光环境 / 星点层次">
+              <img src="assets/images/photography/photo-01.jpg" alt="星空摄影作品" loading="lazy" />
+              <span><b>Night Sky</b><small>低光环境 / 星点层次</small></span>
+            </a>
+            <a class="photo-card js-lightbox" href="assets/images/photography/photo-02.jpg" data-title="Grassland" data-note="远景比例 / 空气感">
+              <img src="assets/images/photography/photo-02.jpg" alt="草坡风景摄影作品" loading="lazy" />
+              <span><b>Grassland</b><small>远景比例 / 空气感</small></span>
+            </a>
+            <a class="photo-card js-lightbox" href="assets/images/photography/photo-03.jpg" data-title="Ridge" data-note="暖色山体 / 横向构图">
+              <img src="assets/images/photography/photo-03.jpg" alt="山地光影摄影作品" loading="lazy" />
+              <span><b>Ridge</b><small>暖色山体 / 横向构图</small></span>
+            </a>
+            <a class="photo-card js-lightbox" href="assets/images/photography/photo-05.jpg" data-title="Swans" data-note="水面留白 / 轻节奏">
+              <img src="assets/images/photography/photo-05.jpg" alt="天鹅摄影作品" loading="lazy" />
+              <span><b>Swans</b><small>水面留白 / 轻节奏</small></span>
+            </a>
+            <a class="photo-card js-lightbox" href="assets/images/photography/photo-06.jpg" data-title="Road" data-note="路面引导 / 开阔感">
+              <img src="assets/images/photography/photo-06.jpg" alt="环湖公路摄影作品" loading="lazy" />
+              <span><b>Road</b><small>路面引导 / 开阔感</small></span>
+            </a>
+            </div>
+          </div>
         </div>
-        <div class="photo-strip" aria-label="摄影作品">
-          <a class="photo-card photo-feature" href="assets/images/photography/photo-01.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-01.jpg" alt="星空摄影作品" loading="lazy" />
-            <span>night sky</span>
-          </a>
-          <a class="photo-card" href="assets/images/photography/photo-02.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-02.jpg" alt="草坡风景摄影作品" loading="lazy" />
-            <span>grassland</span>
-          </a>
-          <a class="photo-card" href="assets/images/photography/photo-03.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-03.jpg" alt="山地光影摄影作品" loading="lazy" />
-            <span>color ridge</span>
-          </a>
-          <a class="photo-card" href="assets/images/photography/photo-04.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-04.jpg" alt="海边车辆摄影作品" loading="lazy" />
-            <span>coast</span>
-          </a>
-          <a class="photo-card" href="assets/images/photography/photo-05.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-05.jpg" alt="天鹅摄影作品" loading="lazy" />
-            <span>swans</span>
-          </a>
-          <a class="photo-card" href="assets/images/photography/photo-06.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-06.jpg" alt="环湖公路摄影作品" loading="lazy" />
-            <span>road</span>
-          </a>
-          <a class="photo-card" href="assets/images/photography/photo-07.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-07.jpg" alt="羊群摄影作品" loading="lazy" />
-            <span>sheep</span>
-          </a>
-          <a class="photo-card" href="assets/images/photography/photo-08.jpg" target="_blank" rel="noopener noreferrer">
-            <img src="assets/images/photography/photo-08.jpg" alt="湖边树林摄影作品" loading="lazy" />
-            <span>lakeside</span>
-          </a>
+
+        <div class="poster-lab" aria-label="商业海报练习">
+          <div class="poster-lab-copy">
+            <p class="tag">Poster Practice / Product Visual</p>
+            <h3>商业海报练习</h3>
+            <p>
+              三张商品视觉练习，主要看产品质感、留白、字体重量和文案位置。
+            </p>
+          </div>
+          <div class="poster-grid">
+            <a class="poster-card poster-card-large js-lightbox" href="assets/images/product-posters/poster-tech-device.png" data-title="Tech Device" data-note="黑金科技产品海报练习">
+              <img src="assets/images/product-posters/poster-tech-device.png" alt="黑金科技产品海报练习" loading="lazy" />
+              <span>Tech Device</span>
+              <em>PSD source</em>
+            </a>
+            <a class="poster-card js-lightbox" href="assets/images/product-posters/poster-fragrance.png" data-title="Fragrance" data-note="极简香水护肤海报练习">
+              <img src="assets/images/product-posters/poster-fragrance.png" alt="极简香水护肤海报练习" loading="lazy" />
+              <span>Fragrance</span>
+              <em>PSD source</em>
+            </a>
+            <a class="poster-card js-lightbox" href="assets/images/product-posters/poster-oriental.png" data-title="Oriental Object" data-note="新国潮精品海报练习">
+              <img src="assets/images/product-posters/poster-oriental.png" alt="新国潮精品海报练习" loading="lazy" />
+              <span>Oriental Object</span>
+              <em>PSD source</em>
+            </a>
+          </div>
+        </div>
+
+        <div class="psd-proof" aria-label="PSD 分层源文件说明">
+          <div class="psd-proof-visual">
+            <p class="tag">PSD Source / Layered File</p>
+            <h3>不是只交一张成品图。</h3>
+            <p>
+              这组海报保留了可编辑 PSD 源文件。网页展示的是导出的 PNG，源文件里把背景、主视觉、光影、
+              装饰和文字分开，后续可以继续替换素材、改文案和调版式。
+            </p>
+            <div class="layer-stack" aria-hidden="true">
+              <span style="--i: 0">05_editable_text</span>
+              <span style="--i: 1">04_layout_graphics</span>
+              <span style="--i: 2">03_light_texture</span>
+              <span style="--i: 3">02_source_materials</span>
+              <span style="--i: 4">01_background_texture</span>
+            </div>
+          </div>
+          <div class="psd-file-list">
+            <div class="psd-file-list-head">
+              <strong>PSD 源文件</strong>
+              <small>可下载的 Photoshop 分层素材版</small>
+            </div>
+            <a class="psd-file-item" href="assets/files/psd-source/05_暗面随行_分层源文件.psd" download>
+              <b>PSD</b>
+              <span>05_暗面随行_分层源文件.psd</span>
+              <small>设备、屏幕、高光、阴影分层</small>
+            </a>
+            <a class="psd-file-item" href="assets/files/psd-source/06_留白气味_分层源文件.psd" download>
+              <b>PSD</b>
+              <span>06_留白气味_分层源文件.psd</span>
+              <small>瓶身、液体、瓶盖、投影分层</small>
+            </a>
+            <a class="psd-file-item" href="assets/files/psd-source/03_AI视觉档案_分层源文件.psd" download>
+              <b>PSD</b>
+              <span>03_AI视觉档案_分层源文件.psd</span>
+              <small>素材占位、信息卡、标题分层</small>
+            </a>
+            <details class="psd-more">
+              <summary>展开全部 7 个 PSD 源文件</summary>
+              <div class="psd-more-list">
+                <a class="psd-file-item" href="assets/files/psd-source/01_剪辑秩序_分层源文件.psd" download>
+                  <b>PSD</b>
+                  <span>01_剪辑秩序_分层源文件.psd</span>
+                  <small>网格、色块、标题、信息区分层</small>
+                </a>
+                <a class="psd-file-item" href="assets/files/psd-source/02_片前清单_分层源文件.psd" download>
+                  <b>PSD</b>
+                  <span>02_片前清单_分层源文件.psd</span>
+                  <small>色块、清单、表格线、文字分层</small>
+                </a>
+                <a class="psd-file-item" href="assets/files/psd-source/03_AI视觉档案_分层源文件.psd" download>
+                  <b>PSD</b>
+                  <span>03_AI视觉档案_分层源文件.psd</span>
+                  <small>素材占位、信息卡、标题分层</small>
+                </a>
+                <a class="psd-file-item" href="assets/files/psd-source/04_节奏剪辑_分层源文件.psd" download>
+                  <b>PSD</b>
+                  <span>04_节奏剪辑_分层源文件.psd</span>
+                  <small>节奏条、版式卡片、文字分层</small>
+                </a>
+                <a class="psd-file-item" href="assets/files/psd-source/05_暗面随行_分层源文件.psd" download>
+                  <b>PSD</b>
+                  <span>05_暗面随行_分层源文件.psd</span>
+                  <small>设备、屏幕、高光、阴影分层</small>
+                </a>
+                <a class="psd-file-item" href="assets/files/psd-source/06_留白气味_分层源文件.psd" download>
+                  <b>PSD</b>
+                  <span>06_留白气味_分层源文件.psd</span>
+                  <small>瓶身、液体、瓶盖、投影分层</small>
+                </a>
+                <a class="psd-file-item" href="assets/files/psd-source/07_入静器物_分层源文件.psd" download>
+                  <b>PSD</b>
+                  <span>07_入静器物_分层源文件.psd</span>
+                  <small>木盒、扣件、烟雾、印章分层</small>
+                </a>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="flat-poster-lab" aria-label="2D 平面海报练习">
+          <div class="flat-poster-heading">
+            <p class="tag">2D Poster / Graphic Study</p>
+            <h3>平面海报练习</h3>
+            <p>偏字体、网格、色块和信息层级的练习，和上面的商品视觉分开看。</p>
+          </div>
+          <div class="flat-poster-grid">
+            <a class="poster-card js-lightbox" href="assets/images/2d-posters/poster-grid-system.png" data-title="Edit Order" data-note="剪辑流程 / 网格排版练习">
+              <img src="assets/images/2d-posters/poster-grid-system.png" alt="网格字体平面海报练习" loading="lazy" />
+              <span>Edit Order</span>
+              <em>PSD source</em>
+            </a>
+            <a class="poster-card js-lightbox" href="assets/images/2d-posters/poster-riso-notes.png" data-title="Pre-cut List" data-note="片前清单 / 色块构成练习">
+              <img src="assets/images/2d-posters/poster-riso-notes.png" alt="双色套印平面海报练习" loading="lazy" />
+              <span>Pre-cut List</span>
+              <em>PSD source</em>
+            </a>
+            <a class="poster-card js-lightbox" href="assets/images/2d-posters/poster-visual-room.png" data-title="AI Visual Log" data-note="AI 视觉档案 / 信息海报练习">
+              <img src="assets/images/2d-posters/poster-visual-room.png" alt="活动信息平面海报练习" loading="lazy" />
+              <span>AI Visual Log</span>
+              <em>PSD source</em>
+            </a>
+            <a class="poster-card js-lightbox" href="assets/images/2d-posters/poster-motion-type.png" data-title="Rhythm Cut" data-note="视频剪辑 / 节奏排版练习">
+              <img src="assets/images/2d-posters/poster-motion-type.png" alt="节奏排版平面海报练习" loading="lazy" />
+              <span>Rhythm Cut</span>
+              <em>PSD source</em>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -344,6 +481,16 @@
       <p>© 2026 冯文泽 Wesley Feng · 作品集与简历</p>
     </footer>
     <div class="grain-transition" aria-hidden="true"></div>
+    <div class="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+      <button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+      <figure>
+        <img src="" alt="" />
+        <figcaption>
+          <strong></strong>
+          <span></span>
+        </figcaption>
+      </figure>
+    </div>
     <script src="assets/js/script.js"></script>
   </body>
 </html>
