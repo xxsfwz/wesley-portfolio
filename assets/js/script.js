@@ -62,7 +62,7 @@ const revealObserver = new IntersectionObserver(
 
 document
   .querySelectorAll(
-    ".section-heading, .studio-tile, .video-case-layout, .story-strip a, .project-feature-card, .ai-shot, .practice-motion .motion-card, .compact-photo-strip .photo-card, .poster-lab, .flat-poster-lab, .poster-card, .resume-block"
+    ".section-heading, .studio-tile, .video-case-layout, .ae-case-layout, .ae-process-board, .story-strip a, .project-feature-card, .ai-shot, .practice-motion .motion-card, .compact-photo-strip .photo-card, .poster-lab, .flat-poster-lab, .poster-card, .resume-block"
   )
   .forEach((item) => {
     item.classList.add("reveal-item");

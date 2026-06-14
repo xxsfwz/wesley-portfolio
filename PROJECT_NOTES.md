@@ -5,10 +5,11 @@
 ## 当前状态
 
 - 网站名称：冯文泽 Wesley Feng | 作品与简历
-- 本地文件夹：`C:\Users\xxsfwz\Documents\New project`
+- 正式网站目录：`C:\Users\xxsfw\Desktop\项目\01_个人作品集网站`
+- GitHub 同步目录：`C:\Users\xxsfw\Desktop\项目\.github-sync`
 - GitHub 仓库：`https://github.com/xxsfwz/wesley-portfolio`
 - 线上网站：`https://xxsfwz.github.io/wesley-portfolio/`
-- 当前定位：测试版 / 作品集模板 / 后续持续补充真实作品
+- 当前定位：正式作品集本地版 / GitHub 同步发布版 / 后续持续补充真实作品
 
 ## 已完成的事情
 
@@ -26,11 +27,10 @@
 ## 当前网站结构
 
 ```text
-New project/
+01_个人作品集网站/
   index.html
   README.md
   PROJECT_NOTES.md
-  Wesley-Portfolio.zip
   assets/
     css/
       styles.css
@@ -39,6 +39,8 @@ New project/
     images/
     videos/
     pdf/
+  projects/
+  04_网站测试版本/
 ```
 
 说明：
@@ -46,13 +48,11 @@ New project/
 - `index.html`：网站主体内容。
 - `assets/css/styles.css`：网站样式。
 - `assets/js/script.js`：轻量交互脚本。
-- `assets/images/`：以后放作品图片、摄影、过程图。
-- `assets/videos/`：以后放 Showreel、录屏、视频作品。
-- `assets/pdf/`：以后放 PDF 简历、证书扫描件。
-- `assets/pdf/冯文泽_简历_作品集版.pdf`：作品集/互联网投递版 PDF 简历，含作品集二维码占位。
-- `assets/pdf/冯文泽_简历_校招照片版.pdf`：校招/传统投递版 PDF 简历，含证件照占位。
-- `assets/pdf/冯文泽_简历_旧版备份.pdf`：第一版 PDF 简历骨架，保留备份。
-- `assets/pdf/冯文泽_简历_源文件.docx`：当前 Word 简历源文件，后续方便修改。
+- `assets/images/`：正式展示图片、摄影、过程图。
+- `assets/videos/`：正式展示视频。
+- `assets/pdf/冯文泽_简历.pdf`：网站公开下载的 PDF 简历。
+- `projects/`：正式项目详情页。
+- `04_网站测试版本/`：测试版和归档测试页，不默认发布。
 - `README.md`：项目基础说明。
 - `PROJECT_NOTES.md`：这份项目备忘录。
 
@@ -65,7 +65,7 @@ New project/
 - 项目展示方式：提醒每个项目按结果、过程、职责来讲。
 - 工作方式：学习理解、创意方案、生成制作、实现迭代。
 - 简历摘要：求职方向、核心优势、工具栈、荣誉证书。
-- 联系方式：邮箱、微信、电话、社交平台占位。
+- 联系方式：邮箱、微信、电话。
 
 ## 已预留的后续加分项
 
@@ -97,11 +97,11 @@ New project/
 
 推荐流程：
 
-1. 先在本地文件夹里修改文件。
-2. 双击 `index.html` 本地预览。
-3. 确认没问题后，到 GitHub 上传覆盖对应文件。
-4. GitHub Pages 会自动重新部署。
-5. 等一会儿刷新线上链接检查结果。
+1. 先在 `01_个人作品集网站/` 修改正式站文件。
+2. 双击 `01_个人作品集网站/index.html` 本地预览。
+3. 确认没问题后，把需要公开发布的文件同步到 `.github-sync/`。
+4. 在 `.github-sync/` 中检查 `git status`、提交并推送。
+5. GitHub Pages / Cloudflare Pages 会自动重新部署，等一会儿刷新线上链接检查结果。
 
 常见修改位置：
 
@@ -116,13 +116,12 @@ New project/
 
 优先级从高到低：
 
-1. 把联系方式换成真实邮箱、微信或电话。
-2. 准备 2-3 个能展示能力的真实作品。
-3. 为每个作品准备最终效果、过程图、使用工具和个人职责。
-4. 准备 PDF 简历，放到 `assets/pdf/`。
-5. 做一个 30-60 秒 Showreel 视频。
-6. 把摄影作品整理成一个小型图片墙。
-7. 后续再增加独立项目详情页。
+1. 继续准备 2-3 个能展示能力的真实作品。
+2. 为每个作品准备最终效果、过程图、使用工具和个人职责。
+3. 继续优化 PDF 简历，更新后放到 `assets/pdf/`。
+4. 做一个 30-60 秒 Showreel 视频。
+5. 把摄影作品整理成更稳定的小型图片墙。
+6. 后续再增加独立项目详情页。
 
 ## 作品整理建议
 
@@ -145,9 +144,15 @@ New project/
 
 ## 当前需要注意
 
-- 现在是测试版，还不建议正式投递。
-- 页面里还有很多占位文字，需要后续替换成真实内容。
-- PDF 简历按钮本地已链接到 `assets/pdf/冯文泽_简历_作品集版.pdf`；如果要让线上网站也能下载，需要把更新后的 `index.html` 和 `assets/pdf/` 里的简历文件上传到 GitHub。
-- 联系方式目前还是占位。
-- 作品封面目前是设计占位，不是真实项目图。
+- `index.html` 是当前正式网站版本；`04_网站测试版本/` 是独立测试页和归档测试页，不影响正式网站。
+- PDF 简历按钮本地已链接到 `assets/pdf/冯文泽_简历.pdf`。
+- 联系方式已更新为当前确认版本：`+86 186 9775 2007`，邮箱为 `1225762114@qq.com / xxsfwz666@gmail.com`，微信为 `xxsfwz`。
+- 网站后续还可以继续降低“AI 味”，但每次大改前要先备份到项目总目录的 `91_旧实验与归档/`。
 - GitHub 仓库是公开的，上传前不要放隐私信息或不想公开的文件。
+
+## 2026-06-13 接手检查
+
+- 正式网站目录确认：`01_个人作品集网站/`。
+- GitHub 同步仓库确认：`.github-sync/`，远程仓库为 `https://github.com/xxsfwz/wesley-portfolio.git`。
+- 已检查正式站 3 个主要 HTML 入口的 89 个本地资源引用，没有缺失文件。
+- 已确认 `.github-sync` 当前工作区干净；发布前从正式站同步，不把 `04_网站测试版本/` 默认带到线上。
