@@ -2117,31 +2117,77 @@ body.has-lightbox {
     grid-auto-rows: 210px;
   }
 
-  .story-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .story-strip,
   .ai-gallery {
-    display: flex;
-    gap: 10px;
-    margin-right: -16px;
-    padding: 0 16px 8px 0;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
+    grid-template-columns: 1fr;
   }
 
-  .story-strip::-webkit-scrollbar,
-  .ai-gallery::-webkit-scrollbar {
-    display: none;
+  .story-strip.is-card-stack,
+  .ai-gallery.is-card-stack {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin-top: 18px;
+    padding: 0;
+    border-radius: 14px;
+    touch-action: pan-y;
+    isolation: isolate;
   }
 
-  .story-strip a {
-    flex: 0 0 min(74vw, 320px);
+  .story-strip.is-card-stack {
+    height: clamp(220px, 58vw, 330px);
+  }
+
+  .ai-gallery.is-card-stack {
+    height: clamp(360px, 98vw, 460px);
+  }
+
+  .story-strip.is-card-stack a,
+  .ai-gallery.is-card-stack .ai-shot {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    margin: 0;
+    border-radius: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: center;
+    transition:
+      opacity 0.34s ease,
+      transform 0.42s cubic-bezier(0.2, 0.8, 0.2, 1),
+      filter 0.34s ease,
+      box-shadow 0.34s ease;
+    will-change: transform, opacity;
+  }
+
+  .story-strip.is-card-stack a {
+    width: min(76vw, 340px);
     aspect-ratio: 16 / 9;
-    scroll-snap-align: start;
+  }
+
+  .ai-gallery.is-card-stack .ai-shot {
+    width: min(70vw, 310px);
+    aspect-ratio: 4 / 5;
+  }
+
+  .story-strip.is-card-stack a.is-active,
+  .ai-gallery.is-card-stack .ai-shot.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    filter: saturate(1.03) contrast(1.03);
+    box-shadow: 0 24px 60px rgba(43, 37, 30, 0.22);
+  }
+
+  .story-strip.is-card-stack a.is-near,
+  .ai-gallery.is-card-stack .ai-shot.is-near {
+    opacity: 0.74;
+    filter: saturate(0.86) contrast(0.96);
+  }
+
+  .story-strip.is-card-stack a.is-far,
+  .ai-gallery.is-card-stack .ai-shot.is-far {
+    opacity: 0.24;
+    filter: saturate(0.78) contrast(0.92);
   }
 
   .ai-gallery {
@@ -2153,17 +2199,39 @@ body.has-lightbox {
     grid-column: span 3;
   }
 
-  .ai-shot,
-  .ai-shot-square,
-  .ai-shot-portrait,
-  .ai-shot-wide-mobile {
-    flex: 0 0 min(68vw, 290px);
-    aspect-ratio: 4 / 5;
-    scroll-snap-align: start;
-  }
-
   .ai-shot img {
     object-position: center top;
+  }
+
+  .card-stack-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 12px 0 2px;
+  }
+
+  .card-stack-controls button {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    color: var(--ink);
+    background: rgba(255, 253, 248, 0.82);
+    border: 1px solid rgba(21, 21, 21, 0.24);
+    border-radius: 50%;
+    box-shadow: 0 12px 30px rgba(43, 37, 30, 0.12);
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .card-stack-controls span {
+    min-width: 54px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 900;
+    text-align: center;
   }
 
   .method-grid div:nth-child(2) {
