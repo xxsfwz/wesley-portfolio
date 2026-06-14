@@ -183,6 +183,9 @@ document.querySelectorAll(".story-strip").forEach((container) => setupCardStack(
 document
   .querySelectorAll(".ai-gallery")
   .forEach((container) => setupCardStack(container, { cardSelector: ".ai-shot" }));
+document
+  .querySelectorAll(".poster-lab .poster-grid")
+  .forEach((container) => setupCardStack(container, { cardSelector: ".poster-card" }));
 
 const lightbox = document.querySelector(".lightbox");
 const lightboxImage = lightbox?.querySelector("img");
