@@ -2267,6 +2267,42 @@ body.has-lightbox {
     grid-template-columns: 1fr;
   }
 
+  .story-strip,
+  .ai-gallery {
+    display: flex;
+    gap: 10px;
+    margin-right: -16px;
+    padding: 0 16px 8px 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .story-strip::-webkit-scrollbar,
+  .ai-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .story-strip a {
+    flex: 0 0 min(74vw, 320px);
+    aspect-ratio: 16 / 9;
+    scroll-snap-align: start;
+  }
+
+  .ai-shot,
+  .ai-shot-square,
+  .ai-shot-portrait,
+  .ai-shot-wide-mobile {
+    flex: 0 0 min(68vw, 290px);
+    aspect-ratio: 4 / 5;
+    scroll-snap-align: start;
+  }
+
+  .ai-shot img {
+    object-position: center top;
+  }
+
   .flat-poster-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
