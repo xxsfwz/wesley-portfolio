@@ -48,6 +48,21 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
+const backToTopButton = document.querySelector(".back-to-top");
+
+function updateBackToTop() {
+  if (!backToTopButton) return;
+  backToTopButton.classList.toggle("is-visible", window.scrollY > 520);
+}
+
+backToTopButton?.addEventListener("click", () => {
+  playTransition();
+  scrollToTarget(document.querySelector("#top") || document.body);
+});
+
+window.addEventListener("scroll", updateBackToTop, { passive: true });
+updateBackToTop();
+
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -62,7 +77,7 @@ const revealObserver = new IntersectionObserver(
 
 document
   .querySelectorAll(
-    ".section-heading, .studio-tile, .video-case-layout, .ae-case-layout, .ae-process-board, .story-strip a, .project-feature-card, .ai-shot, .practice-motion .motion-card, .compact-photo-strip .photo-card, .poster-lab, .flat-poster-lab, .poster-card, .resume-block"
+    ".section-heading, .studio-tile, .video-case-layout, .ae-case-layout, .ae-process-board, .ae-motion-mini-grid .motion-card, .story-strip a, .project-feature-card, .visual-lab-panel, .ai-shot, .compact-photo-strip .photo-card, .poster-lab, .flat-poster-lab, .poster-card, .resume-block"
   )
   .forEach((item) => {
     item.classList.add("reveal-item");
@@ -222,4 +237,27 @@ lightbox?.addEventListener("click", (event) => {
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeLightbox();
+});
+
+document.querySelectorAll(".copy-contact").forEach((button) => {
+  const originalText = button.textContent;
+  button.addEventListener("click", async () => {
+    const text = button.dataset.copy;
+    if (!text) return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      button.textContent = "已复制";
+      button.classList.add("is-copied");
+      window.setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove("is-copied");
+      }, 1600);
+    } catch (error) {
+      button.textContent = "复制失败";
+      window.setTimeout(() => {
+        button.textContent = originalText;
+      }, 1600);
+    }
+  });
 });
