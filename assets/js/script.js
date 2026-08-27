@@ -1,5 +1,51 @@
 const transitionLayer = document.querySelector(".grain-transition");
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const header = document.querySelector(".site-header");
+const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"], .floating-toc a[href^="#"]'));
+const themeToggle = document.querySelector(".theme-toggle");
+
+function readPreference(key) {
+  try {
+    return window.localStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+}
+
+function writePreference(key, value) {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch (error) {
+    // Direct file previews can block localStorage; the UI still works without persistence.
+  }
+}
+
+function setTheme(theme) {
+  const isDark = theme === "dark";
+  document.body.classList.toggle("theme-dark", isDark);
+  themeToggle?.setAttribute("aria-pressed", String(isDark));
+  if (themeToggle) themeToggle.textContent = isDark ? "浅色" : "深色";
+  writePreference("portfolio-theme", theme);
+}
+
+if (readPreference("portfolio-theme") === "dark") setTheme("dark");
+
+themeToggle?.addEventListener("click", () => {
+  setTheme(document.body.classList.contains("theme-dark") ? "light" : "dark");
+});
+
+const heroTitle = document.querySelector(".hero h1");
+if (heroTitle && !motionQuery.matches) {
+  const text = heroTitle.textContent || "";
+  heroTitle.textContent = "";
+  Array.from(text).forEach((char, index) => {
+    const span = document.createElement("span");
+    span.className = "title-char";
+    span.style.setProperty("--i", index);
+    span.textContent = char === " " ? "\u00a0" : char;
+    heroTitle.append(span);
+  });
+}
 
 function playTransition() {
   if (!transitionLayer || motionQuery.matches) return;
@@ -49,10 +95,26 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 const backToTopButton = document.querySelector(".back-to-top");
+const updateCurtain = document.querySelector(".update-curtain");
 
 function updateBackToTop() {
   if (!backToTopButton) return;
   backToTopButton.classList.toggle("is-visible", window.scrollY > 520);
+}
+
+function updateHeaderState() {
+  header?.classList.toggle("is-scrolled", window.scrollY > 18);
+}
+
+function updateCurtainState() {
+  if (!updateCurtain) return;
+  const releaseDistance = Math.max(window.innerHeight * 0.62, 360);
+  const progress = Math.min(window.scrollY / releaseDistance, 1);
+  const remaining = 1 - progress;
+  updateCurtain.style.setProperty("--update-opacity", remaining.toFixed(3));
+  updateCurtain.style.setProperty("--update-blur", `${(remaining * 12).toFixed(2)}px`);
+  updateCurtain.style.setProperty("--update-gray", (remaining * 0.4).toFixed(3));
+  updateCurtain.classList.toggle("is-cleared", progress >= 0.995);
 }
 
 backToTopButton?.addEventListener("click", () => {
@@ -60,8 +122,14 @@ backToTopButton?.addEventListener("click", () => {
   scrollToTarget(document.querySelector("#top") || document.body);
 });
 
-window.addEventListener("scroll", updateBackToTop, { passive: true });
+window.addEventListener("scroll", () => {
+  updateBackToTop();
+  updateHeaderState();
+  updateCurtainState();
+}, { passive: true });
 updateBackToTop();
+updateHeaderState();
+updateCurtainState();
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -83,6 +151,24 @@ document
     item.classList.add("reveal-item");
     revealObserver.observe(item);
   });
+
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    const id = visible.target.id || "top";
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
+    });
+  },
+  { rootMargin: "-28% 0px -58% 0px", threshold: [0.08, 0.18, 0.32] }
+);
+
+document.querySelectorAll("main > section[id], main").forEach((section) => {
+  sectionObserver.observe(section);
+});
 
 const stackMediaQuery = window.matchMedia("(max-width: 980px)");
 
@@ -261,3 +347,60 @@ document.querySelectorAll(".copy-contact").forEach((button) => {
     }
   });
 });
+
+document.querySelectorAll(".video-player-frame video").forEach((video) => {
+  let wasStartedByHover = false;
+  let previousMuted = video.muted;
+
+  video.addEventListener("mouseenter", async () => {
+    if (motionQuery.matches || !video.paused) return;
+    wasStartedByHover = true;
+    previousMuted = video.muted;
+    video.muted = true;
+    try {
+      await video.play();
+    } catch (error) {
+      wasStartedByHover = false;
+    }
+  });
+
+  video.addEventListener("mouseleave", () => {
+    if (!wasStartedByHover) return;
+    video.pause();
+    video.currentTime = 0;
+    video.muted = previousMuted;
+    wasStartedByHover = false;
+  });
+});
+
+const cursorDot = document.querySelector(".cursor-dot");
+const cursorRing = document.querySelector(".cursor-ring");
+const cursorFine = window.matchMedia("(pointer: fine)");
+
+if (cursorDot && cursorRing && cursorFine.matches && !motionQuery.matches) {
+  let ringX = 0;
+  let ringY = 0;
+  let mouseX = 0;
+  let mouseY = 0;
+  document.body.classList.add("has-custom-cursor");
+
+  window.addEventListener("pointermove", (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  }, { passive: true });
+
+  function animateCursor() {
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    window.requestAnimationFrame(animateCursor);
+  }
+
+  animateCursor();
+
+  document.querySelectorAll("a, button, video, .js-lightbox").forEach((target) => {
+    target.addEventListener("mouseenter", () => document.body.classList.add("is-link-hover"));
+    target.addEventListener("mouseleave", () => document.body.classList.remove("is-link-hover"));
+  });
+}

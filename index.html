@@ -15,7 +15,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:image" content="assets/images/glide-video/glide-story-06-large.webp" />
     <title>冯文泽 Wesley Feng | 作品集与简历</title>
-    <link rel="stylesheet" href="assets/css/styles.css?v=hero-stack-1" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=portfolio-curtain-2" />
   </head>
   <body>
     <header class="site-header">
@@ -31,7 +31,17 @@
         <a href="#resume">简历</a>
         <a href="#contact">联系</a>
       </nav>
+      <button class="theme-toggle" type="button" aria-label="切换深色模式" aria-pressed="false">深色</button>
     </header>
+
+    <aside class="update-curtain" aria-label="作品集更新状态">
+      <div class="update-curtain-copy">
+        <p class="eyebrow">Portfolio Status / 2026</p>
+        <h2>暂未更新</h2>
+        <p>当前保留已公开内容；新的作品正在整理，后续会补充。</p>
+        <span>向下浏览可查看已有作品</span>
+      </div>
+    </aside>
 
     <main id="top">
       <section class="hero">
@@ -165,7 +175,7 @@
 
         <div class="ae-case-layout">
           <div class="ae-case-player video-player-frame">
-            <video controls preload="none" aria-label="App 介绍 AE 动效短片">
+            <video controls preload="none" poster="assets/images/ae-motion/glide-ae-app-intro-poster.jpg" aria-label="App 介绍 AE 动效短片">
               <source src="assets/videos/glide-ae-app-intro.mp4" type="video/mp4" />
               当前浏览器暂不支持视频播放。
             </video>
@@ -262,7 +272,7 @@
           </div>
           <div class="ai-visuals-copy">
             <p>
-              AI 图看封面气质和人物质感；摄影补充构图、光线和留白。
+              摄影是更主要的画面训练；AI 图作为封面气质和人物视觉的补充练习。
             </p>
             <a
               class="button ghost ai-case-link"
@@ -276,48 +286,11 @@
         </div>
 
         <div class="visual-lab-grid">
-          <div class="visual-lab-panel visual-ai-panel">
-            <div class="visual-panel-head">
-              <p class="tag">AI Visual</p>
-              <h3>封面气质与人物视觉</h3>
-            </div>
-            <div class="ai-gallery is-card-stack" aria-label="生成式 AI 图片作品">
-              <a class="ai-shot ai-shot-square" href="assets/images/ai-gallery/ai-visual-01-large.webp" target="_blank" rel="noopener noreferrer">
-                <img src="assets/images/ai-gallery/ai-visual-01-thumb.webp" width="700" height="700" loading="lazy" alt="人物风格视觉实验 01" />
-                <span>cover mood</span>
-              </a>
-              <a class="ai-shot ai-shot-square ai-shot-rise" href="assets/images/ai-gallery/ai-visual-02-large.webp" target="_blank" rel="noopener noreferrer">
-                <img src="assets/images/ai-gallery/ai-visual-02-thumb.webp" width="700" height="700" loading="lazy" alt="人物风格视觉实验 02" />
-                <span>visual study</span>
-              </a>
-              <a class="ai-shot ai-shot-square" href="assets/images/ai-gallery/ai-visual-03-large.webp" target="_blank" rel="noopener noreferrer">
-                <img src="assets/images/ai-gallery/ai-visual-03-thumb.webp" width="700" height="700" loading="lazy" alt="短视频封面风格视觉实验" />
-                <span>short-form</span>
-              </a>
-              <a class="ai-shot ai-shot-portrait" href="assets/images/ai-gallery/ai-visual-04-large.webp" target="_blank" rel="noopener noreferrer">
-                <img src="assets/images/ai-gallery/ai-visual-04-thumb.webp" width="393" height="700" loading="lazy" alt="竖版人物视觉实验 01" />
-                <span>portrait</span>
-              </a>
-              <a class="ai-shot ai-shot-portrait ai-shot-rise" href="assets/images/ai-gallery/ai-visual-05-large.webp" target="_blank" rel="noopener noreferrer">
-                <img src="assets/images/ai-gallery/ai-visual-05-thumb.webp" width="393" height="700" loading="lazy" alt="竖版人物视觉实验 02" />
-                <span>visual study</span>
-              </a>
-              <a class="ai-shot ai-shot-portrait" href="assets/images/ai-gallery/ai-visual-06-large.webp" target="_blank" rel="noopener noreferrer">
-                <img src="assets/images/ai-gallery/ai-visual-06-thumb.webp" width="393" height="700" loading="lazy" alt="竖版人物视觉实验 03" />
-                <span>tone test</span>
-              </a>
-              <a class="ai-shot ai-shot-portrait ai-shot-rise" href="assets/images/ai-gallery/ai-visual-07-large.webp" target="_blank" rel="noopener noreferrer">
-                <img src="assets/images/ai-gallery/ai-visual-07-thumb.webp" width="393" height="700" loading="lazy" alt="竖版人物视觉实验 04" />
-                <span>platform</span>
-              </a>
-            </div>
-          </div>
-
           <div class="visual-lab-panel visual-photo-panel">
             <div class="visual-panel-head">
               <p class="tag">Photography</p>
-              <h3>摄影补充</h3>
-              <p>尼康 D5200 实拍，主要用长焦和旅行场景练习构图、光线和画面留白。</p>
+              <h3>尼康 D5200 实拍</h3>
+              <p>主要用长焦和旅行场景练习构图、光线和画面留白。</p>
               <div class="photo-gear-list" aria-label="摄影器材信息">
                 <span>Nikon D5200</span>
                 <span>长焦拍摄</span>
@@ -329,7 +302,7 @@
                 <img src="assets/images/photography/photo-01.jpg" alt="星空摄影作品" loading="lazy" />
                 <span><b>Night Sky</b><small>低光环境 / 星点层次</small></span>
               </a>
-              <a class="photo-card js-lightbox" href="assets/images/photography/photo-02.jpg" data-title="Grassland" data-note="远景比例 / 空气感">
+              <a class="photo-card photo-wide js-lightbox" href="assets/images/photography/photo-02.jpg" data-title="Grassland" data-note="远景比例 / 空气感">
                 <img src="assets/images/photography/photo-02.jpg" alt="草坡风景摄影作品" loading="lazy" />
                 <span><b>Grassland</b><small>远景比例 / 空气感</small></span>
               </a>
@@ -344,6 +317,25 @@
               <a class="photo-card js-lightbox" href="assets/images/photography/photo-06.jpg" data-title="Road" data-note="路面引导 / 开阔感">
                 <img src="assets/images/photography/photo-06.jpg" alt="环湖公路摄影作品" loading="lazy" />
                 <span><b>Road</b><small>路面引导 / 开阔感</small></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="visual-lab-panel visual-ai-panel">
+            <div class="visual-panel-head">
+              <p class="tag">AI Visual</p>
+              <h3>AI 视觉补充</h3>
+              <p>用来练习封面气质、人物质感和色彩统一。</p>
+            </div>
+            <div class="ai-gallery is-card-stack" aria-label="生成式 AI 图片作品">
+              <a class="ai-shot ai-shot-square" href="assets/images/ai-gallery/ai-visual-01-large.webp" target="_blank" rel="noopener noreferrer">
+                <img src="assets/images/ai-gallery/ai-visual-01-thumb.webp" width="700" height="700" loading="lazy" alt="人物风格视觉实验 01" />
+              </a>
+              <a class="ai-shot ai-shot-square ai-shot-rise" href="assets/images/ai-gallery/ai-visual-02-large.webp" target="_blank" rel="noopener noreferrer">
+                <img src="assets/images/ai-gallery/ai-visual-02-thumb.webp" width="700" height="700" loading="lazy" alt="人物风格视觉实验 02" />
+              </a>
+              <a class="ai-shot ai-shot-square" href="assets/images/ai-gallery/ai-visual-03-large.webp" target="_blank" rel="noopener noreferrer">
+                <img src="assets/images/ai-gallery/ai-visual-03-thumb.webp" width="700" height="700" loading="lazy" alt="短视频封面风格视觉实验" />
               </a>
             </div>
           </div>
@@ -557,8 +549,10 @@
     <button class="back-to-top" type="button" aria-label="回到顶部">↑</button>
 
     <footer class="footer">
-      <p>© 2026 冯文泽 Wesley Feng · 作品集与简历</p>
+      <p>© 2026 冯文泽 Wesley Feng · Designed & Built by Wesley Feng · Portfolio site since 2026</p>
     </footer>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
     <div class="grain-transition" aria-hidden="true"></div>
     <div class="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
       <button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
@@ -570,6 +564,6 @@
         </figcaption>
       </figure>
     </div>
-    <script src="assets/js/script.js?v=hero-stack-1"></script>
+    <script src="assets/js/script.js?v=portfolio-curtain-2"></script>
   </body>
 </html>
