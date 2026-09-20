@@ -47,6 +47,32 @@ if (heroTitle && !motionQuery.matches) {
   });
 }
 
+const heroParallax = document.querySelector("[data-hero-parallax]");
+const finePointer = window.matchMedia("(pointer: fine)");
+
+if (heroParallax && finePointer.matches && !motionQuery.matches) {
+  const tiles = Array.from(heroParallax.querySelectorAll(".studio-tile"));
+
+  heroParallax.addEventListener("pointermove", (event) => {
+    const rect = heroParallax.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    tiles.forEach((tile, index) => {
+      const depth = [18, 12, 24][index] || 10;
+      tile.style.setProperty("--parallax-x", `${(x * depth).toFixed(2)}px`);
+      tile.style.setProperty("--parallax-y", `${(y * depth).toFixed(2)}px`);
+    });
+  });
+
+  heroParallax.addEventListener("pointerleave", () => {
+    tiles.forEach((tile) => {
+      tile.style.setProperty("--parallax-x", "0px");
+      tile.style.setProperty("--parallax-y", "0px");
+    });
+  });
+}
+
 function playTransition() {
   if (!transitionLayer || motionQuery.matches) return;
   transitionLayer.classList.remove("is-active");
@@ -95,7 +121,6 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 const backToTopButton = document.querySelector(".back-to-top");
-const updateCurtain = document.querySelector(".update-curtain");
 
 function updateBackToTop() {
   if (!backToTopButton) return;
@@ -106,17 +131,6 @@ function updateHeaderState() {
   header?.classList.toggle("is-scrolled", window.scrollY > 18);
 }
 
-function updateCurtainState() {
-  if (!updateCurtain) return;
-  const releaseDistance = Math.max(window.innerHeight * 0.62, 360);
-  const progress = Math.min(window.scrollY / releaseDistance, 1);
-  const remaining = 1 - progress;
-  updateCurtain.style.setProperty("--update-opacity", remaining.toFixed(3));
-  updateCurtain.style.setProperty("--update-blur", `${(remaining * 12).toFixed(2)}px`);
-  updateCurtain.style.setProperty("--update-gray", (remaining * 0.4).toFixed(3));
-  updateCurtain.classList.toggle("is-cleared", progress >= 0.995);
-}
-
 backToTopButton?.addEventListener("click", () => {
   playTransition();
   scrollToTarget(document.querySelector("#top") || document.body);
@@ -125,11 +139,9 @@ backToTopButton?.addEventListener("click", () => {
 window.addEventListener("scroll", () => {
   updateBackToTop();
   updateHeaderState();
-  updateCurtainState();
 }, { passive: true });
 updateBackToTop();
 updateHeaderState();
-updateCurtainState();
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -205,9 +217,14 @@ function setupCardStack(container, options = {}) {
     return offset;
   }
 
+  function isStackActive() {
+    return options.always === true || stackMediaQuery.matches;
+  }
+
   function render() {
-    container.classList.toggle("is-card-stack", stackMediaQuery.matches);
-    controls.hidden = !stackMediaQuery.matches;
+    const stackActive = isStackActive();
+    container.classList.toggle("is-card-stack", stackActive);
+    controls.hidden = !stackActive;
 
     cards.forEach((card, index) => {
       card.classList.remove("is-active", "is-near", "is-far");
@@ -216,7 +233,7 @@ function setupCardStack(container, options = {}) {
       card.style.zIndex = "";
       card.style.opacity = "";
 
-      if (!stackMediaQuery.matches) return;
+      if (!stackActive) return;
 
       const offset = shortestOffset(index);
       const abs = Math.abs(offset);
@@ -242,6 +259,9 @@ function setupCardStack(container, options = {}) {
     });
 
     counter.textContent = `${activeIndex + 1} / ${cards.length}`;
+    container.dispatchEvent(new CustomEvent("cardstackchange", {
+      detail: { activeCard: cards[activeIndex], activeIndex }
+    }));
   }
 
   function go(delta) {
@@ -253,13 +273,13 @@ function setupCardStack(container, options = {}) {
   nextButton.addEventListener("click", () => go(1));
 
   container.addEventListener("pointerdown", (event) => {
-    if (!stackMediaQuery.matches) return;
+    if (!isStackActive()) return;
     startX = event.clientX;
     startY = event.clientY;
   });
 
   container.addEventListener("pointerup", (event) => {
-    if (!stackMediaQuery.matches) return;
+    if (!isStackActive()) return;
     const deltaX = event.clientX - startX;
     const deltaY = event.clientY - startY;
     if (Math.abs(deltaX) < 44 || Math.abs(deltaX) < Math.abs(deltaY)) return;
@@ -268,7 +288,7 @@ function setupCardStack(container, options = {}) {
 
   cards.forEach((card, index) => {
     card.addEventListener("click", (event) => {
-      if (!stackMediaQuery.matches) return;
+      if (!isStackActive()) return;
       const offset = shortestOffset(index);
       if (offset === 0) return;
       event.preventDefault();
@@ -280,7 +300,37 @@ function setupCardStack(container, options = {}) {
   render();
 }
 
-document.querySelectorAll(".story-strip").forEach((container) => setupCardStack(container));
+document.querySelectorAll(".story-strip").forEach((container) => setupCardStack(container, { always: true }));
+document.querySelectorAll(".ad-shot-stack").forEach((container) => {
+  container.addEventListener("cardstackchange", (event) => {
+    container.querySelectorAll("video").forEach((video) => {
+      video.pause();
+      video.remove();
+    });
+    container.querySelectorAll("a").forEach((card) => card.classList.remove("is-playing"));
+  });
+
+  container.addEventListener("click", (event) => {
+    const card = event.target.closest("a");
+    if (!card || !container.contains(card) || event.defaultPrevented || event.target.closest("video")) return;
+    if (!card.classList.contains("is-active")) return;
+
+    event.preventDefault();
+    const poster = card.querySelector("img")?.currentSrc || card.querySelector("img")?.src;
+    const video = document.createElement("video");
+    video.controls = true;
+    video.preload = "metadata";
+    video.playsInline = true;
+    video.poster = poster || "";
+    video.src = card.href;
+    video.setAttribute("aria-label", "播放当前 AI 广告镜头选段");
+    card.append(video);
+    card.classList.add("is-playing");
+    video.play().catch(() => {});
+  });
+
+  setupCardStack(container, { always: true });
+});
 document
   .querySelectorAll(".ai-gallery")
   .forEach((container) => setupCardStack(container, { cardSelector: ".ai-shot" }));
