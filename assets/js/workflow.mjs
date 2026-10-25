@@ -42,3 +42,51 @@ if (root) {
   root.querySelector('.workflow-next').addEventListener('click', () => select(current + 1));
   select(0);
 }
+
+const caseDialog = document.querySelector('#workflow-case-dialog');
+if (caseDialog) {
+  const records = {
+    cheer: {
+      title: 'Cheer Reborn: Captain of the Rival Team',
+      summary: '围绕剧情钩子和解说节奏，制作可继续修改的混剪与解说草稿。',
+      points: ['前 20 集剧情分析与重复片段核对', '30 条混剪、10 条解说的制作批次', '复核自然钩子结尾、黑帧与字幕样式'],
+      image: 'assets/images/workflow/cheer-reborn.jpg',
+      source: 'https://verticalvault.app/dramas/cheer-reborn-captain-of-the-rival-team-VV-119291'
+    },
+    error: {
+      title: 'Error 404: Slept With the Wrong Guy',
+      summary: '以人物关系和关键剧情为线索，组织混剪片段与解说结构。',
+      points: ['前 20 集剧情分析', '30 条混剪、10 条解说的制作批次', '检查台词边界、草稿引用与成片接缝'],
+      image: 'assets/images/workflow/error-404.jpg',
+      source: 'https://vdrama.fans/en/drama/error-404-slept-with-the-wrong-guy-freereels-S6rRH9LWcS'
+    },
+    her: {
+      title: 'Her Name Was Never His',
+      summary: '基于已手动调整的草稿继续制作，保留原有风格和可编辑结构。',
+      points: ['30 条剧情混剪的制作批次', '尾部、接缝与时间线同步复核', '只修改必要片段，避免覆盖既有人工调整'],
+      image: '', source: ''
+    }
+  };
+  const imageWrap = caseDialog.querySelector('.workflow-case-dialog-art');
+  const image = caseDialog.querySelector('[data-case-image]');
+  const source = caseDialog.querySelector('[data-case-source]');
+  document.querySelectorAll('[data-case]').forEach(button => button.addEventListener('click', () => {
+    const record = records[button.dataset.case];
+    caseDialog.querySelector('[data-case-title]').textContent = record.title;
+    caseDialog.querySelector('[data-case-summary]').textContent = record.summary;
+    const list = caseDialog.querySelector('[data-case-points]');
+    list.replaceChildren(...record.points.map(point => { const item = document.createElement('li'); item.textContent = point; return item; }));
+    imageWrap.hidden = !record.image;
+    if (record.image) image.src = record.image;
+    else image.removeAttribute('src');
+    source.hidden = !record.source;
+    if (record.source) source.href = record.source;
+    else source.removeAttribute('href');
+    caseDialog.showModal();
+    document.body.style.overflow = 'hidden';
+  }));
+  function closeCase() { caseDialog.close(); document.body.style.overflow = ''; }
+  caseDialog.querySelector('.workflow-case-close').addEventListener('click', closeCase);
+  caseDialog.addEventListener('click', event => { if (event.target === caseDialog) closeCase(); });
+  caseDialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+}
