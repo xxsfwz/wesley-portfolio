@@ -18,6 +18,7 @@ if (root) {
     tool: root.querySelector('[data-wf-tool]')
   };
   const progress = root.querySelector('.workflow-progress span');
+  const stage = root.querySelector('.workflow-stage');
   let current = 0;
   function select(index, focus = false) {
     current = (index + steps.length) % steps.length;
@@ -31,16 +32,17 @@ if (root) {
     if (focus) buttons[current].focus();
   }
   buttons.forEach((button, i) => {
-    button.addEventListener('click', () => select(i));
+    button.addEventListener('click', () => { select(i); stage.hidden = false; });
     button.addEventListener('keydown', event => {
       if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
         event.preventDefault();
-        select(i + (event.key === 'ArrowRight' ? 1 : -1), true);
+        select(i + (event.key === 'ArrowRight' ? 1 : -1), true); stage.hidden = false;
       }
     });
   });
   root.querySelector('.workflow-next').addEventListener('click', () => select(current + 1));
   select(0);
+  stage.hidden = true;
 }
 
 const caseDialog = document.querySelector('#workflow-case-dialog');
@@ -50,14 +52,14 @@ if (caseDialog) {
       title: 'Cheer Reborn: Captain of the Rival Team',
       summary: '围绕剧情钩子和解说节奏，制作可继续修改的混剪与解说草稿。',
       points: ['前 20 集剧情分析与重复片段核对', '30 条混剪、10 条解说的制作批次', '复核自然钩子结尾、黑帧与字幕样式'],
-      image: 'assets/images/workflow/cheer-reborn.jpg',
+      image: 'assets/images/workflow/cheer-reborn.webp',
       source: 'https://verticalvault.app/dramas/cheer-reborn-captain-of-the-rival-team-VV-119291'
     },
     error: {
       title: 'Error 404: Slept With the Wrong Guy',
       summary: '以人物关系和关键剧情为线索，组织混剪片段与解说结构。',
       points: ['前 20 集剧情分析', '30 条混剪、10 条解说的制作批次', '检查台词边界、草稿引用与成片接缝'],
-      image: 'assets/images/workflow/error-404.jpg',
+      image: 'assets/images/workflow/error-404.webp',
       source: 'https://vdrama.fans/en/drama/error-404-slept-with-the-wrong-guy-freereels-S6rRH9LWcS'
     },
     her: {
