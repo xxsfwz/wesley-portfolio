@@ -35,7 +35,7 @@ themeToggle?.addEventListener("click", () => {
 });
 
 const heroTitle = document.querySelector(".hero h1");
-if (heroTitle && !motionQuery.matches) {
+if (heroTitle && !heroTitle.children.length && !motionQuery.matches) {
   const text = heroTitle.textContent || "";
   heroTitle.textContent = "";
   Array.from(text).forEach((char, index) => {
@@ -454,3 +454,4 @@ if (cursorDot && cursorRing && cursorFine.matches && !motionQuery.matches) {
     target.addEventListener("mouseleave", () => document.body.classList.remove("is-link-hover"));
   });
 }
+
