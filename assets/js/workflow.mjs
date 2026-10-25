@@ -71,7 +71,6 @@ if (caseDialog) {
   };
   const imageWrap = caseDialog.querySelector('.workflow-case-dialog-art');
   const image = caseDialog.querySelector('[data-case-image]');
-  const source = caseDialog.querySelector('[data-case-source]');
   document.querySelectorAll('[data-case]').forEach(button => button.addEventListener('click', () => {
     const record = records[button.dataset.case];
     caseDialog.querySelector('[data-case-title]').textContent = record.title;
@@ -81,9 +80,6 @@ if (caseDialog) {
     imageWrap.hidden = !record.image;
     if (record.image) image.src = record.image;
     else image.removeAttribute('src');
-    source.hidden = !record.source;
-    if (record.source) source.href = record.source;
-    else source.removeAttribute('href');
     caseDialog.showModal();
     document.body.style.overflow = 'hidden';
   }));
