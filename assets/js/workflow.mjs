@@ -59,14 +59,13 @@ if (root) {
       const camera = new THREE.PerspectiveCamera(40, 1, .1, 100);
       camera.position.set(0, 0, 9);
       const group = new THREE.Group(); scene.add(group);
-      const points = [];
-      for (let i = 0; i < 6; i++) {
-        const angle = i * Math.PI / 3 - Math.PI / 2;
-        points.push(new THREE.Vector3(Math.cos(angle) * 2.45, Math.sin(angle) * 1.62, Math.sin(angle * 2) * .65));
-      }
-      const curve = new THREE.CatmullRomCurve3([...points, points[0]], true, 'centripetal');
+      const points = [
+        [-2.55,-.75,-.35],[-1.55,.45,.2],[-.5,-.25,.45],
+        [.55,.65,-.2],[1.55,-.3,.3],[2.55,.55,-.25]
+      ].map(([x,y,z]) => new THREE.Vector3(x,y,z));
+      const curve = new THREE.CatmullRomCurve3(points, false, 'centripetal');
       const lineGeo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(240));
-      const line = new THREE.LineLoop(lineGeo, new THREE.LineBasicMaterial({ color: 0x6f7a75, transparent: true, opacity: .8 }));
+      const line = new THREE.Line(lineGeo, new THREE.LineBasicMaterial({ color: 0xaabdb0, transparent: true, opacity: .7 }));
       group.add(line);
       const nodes = points.map((point, i) => {
         const dot = new THREE.Mesh(new THREE.SphereGeometry(.085, 16, 12), new THREE.MeshBasicMaterial({ color: i === 0 ? 0xddeae3 : 0x6f7a75 }));
@@ -98,9 +97,9 @@ if (root) {
         const tick = () => {
           if (!visible || document.hidden || !root.closest('details').open) { running = false; return; }
           position += (target - position) * .075;
-          const a = Math.floor((position + 600) % 6);
-          const b = (a + 1) % 6;
-          const frac = ((position % 6) + 6) % 6 - a;
+          const a = Math.max(0, Math.min(5, Math.floor(position)));
+          const b = Math.min(5, a + 1);
+          const frac = position - a;
           marker.position.copy(points[a]).lerp(points[b], Math.max(0, Math.min(1, frac)));
           halo.position.copy(marker.position);
           group.rotation.y += .0009;
