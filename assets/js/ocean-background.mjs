@@ -2,7 +2,6 @@ import { World, AsciiRenderer } from '../vendor/ascii-sharks/index.mjs';
 
 const canvas = document.querySelector('#ocean-background');
 const toggle = document.querySelector('#ocean-toggle');
-const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const compact = matchMedia('(max-width: 600px)').matches;
 let renderer;
 try { renderer = new AsciiRenderer(canvas); } catch { canvas.remove(); }
@@ -13,8 +12,9 @@ if (renderer) {
     { kind: 'hammerhead', size: compact ? .72 : .92 },
     { kind: 'classic', size: compact ? .55 : .68 },
   ], compact ? 24 : 60);
-  let manualPause = motion.matches;
-  try { const stored = localStorage.getItem('portfolio-ocean-paused'); if (stored !== null) manualPause = stored === '1'; } catch {}
+  // Each visit starts playing; pause is a choice for the current visit only.
+  let manualPause = false;
+  try { localStorage.removeItem('portfolio-ocean-paused'); } catch {}
   let raf = 0;
   let previous = 0;
   let drawn = 0;
@@ -57,7 +57,6 @@ if (renderer) {
   }
   toggle.addEventListener('click', () => {
     manualPause = !manualPause;
-    try { localStorage.setItem('portfolio-ocean-paused', manualPause ? '1' : '0'); } catch {}
     sync();
   });
   window.addEventListener('pointermove', pointer, { passive: true });
@@ -71,7 +70,6 @@ if (renderer) {
   resizer.observe(canvas);
   document.querySelectorAll('dialog').forEach(el => dialogs.observe(el, { attributes: true, attributeFilter: ['open'] }));
   document.addEventListener('visibilitychange', sync);
-  motion.addEventListener('change', () => { manualPause = motion.matches; sync(); });
   resize();
   // Warm up the simulation so the first frame already has recognisable fish.
   for (let i = 0; i < 90; i++) world.step(1 / 60);
