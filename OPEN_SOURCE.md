@@ -24,3 +24,10 @@
 
 ## 影像视觉调整
 撤下 Three.js 装饰线框和 interactions.js 小交互。当前入口采用 cinema.css / cinema.js：真实泰语视频静音预览、浮动影像叠层、深色光影和 AE 展示区。预览可暂停，离屏/后台/弹窗打开时暂停；减少动态效果模式使用静态封面。已验证自动静音播放、暂停、AE视频与移动端无溢出。
+
+
+## 2026-11-03 ASCII 海洋背景
+- 实际集成 stackedlol/ascii-sharks：https://github.com/stackedlol/ascii-sharks ，MIT。许可证、TypeScript 源码与浏览器模块保存在 assets/vendor/ascii-sharks/。
+- 保留原版鱼群/鲨鱼模拟及字符渲染；本地适配移除演示网格，以 CSS 反相、灰度和透明度适配浅色作品集。
+- assets/js/ocean-background.mjs 控制背景层、30fps上限、鱼群密度、鼠标互动及暂停；播放作品视频、后台和减少动态效果设置会暂停。
+- 当前背景仅用于首页，原有作品、视频、简历与工作流内容不变。
